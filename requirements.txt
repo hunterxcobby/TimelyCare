@@ -12,6 +12,7 @@ pillow==10.2.0
 psycopg2==2.9.9
 psycopg2-binary==2.9.9
 PyMySQL==1.1.0
+python-dotenv==1.0.1
 pytz==2024.1
 sqlparse==0.4.4
 sqlpipe==0.2.1

@@ -132,3 +132,6 @@ cython_debug/
 # Ignore all local .env files
 **/.env
 **/.env.*
+
+
+node_modules/

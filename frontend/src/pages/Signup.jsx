@@ -30,12 +30,15 @@ export default function Example() {
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
             
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in as a Specialist
+            Sign up as a Specialist 
+            <a href="/Signup2" className="font-medium text-one hover:text-two">
+             
+            </a>
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{" "}
             <a href="/Signup2" className="font-medium text-one hover:text-two">
-              Sign up as a patient
+              patient
             </a>
           </p>
         </div>

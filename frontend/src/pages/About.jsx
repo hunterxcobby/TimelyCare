@@ -50,13 +50,7 @@ export default function Example() {
           </dl>
         </div>
       </div>
-      <div className="max-w-2xl lg:mx-auto lg:text-center">
-        <h2 className="text-xl font-extrabold tracking-tight text-two sm:text-4xl">
-          Join us on this transformative journey as we revolutionize the
-          healthcare experience. TimelyCare is your partner in prioritizing
-          well-being, because your health shouldn't wait!.
-        </h2>
-      </div>
+     
     </div>
   );
 }

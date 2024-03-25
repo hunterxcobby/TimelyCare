@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_nextjs.apps.DjangoNextJSConfig',
+    'rest_framework',
+    'profiles',
 ]
 
 MIDDLEWARE = [

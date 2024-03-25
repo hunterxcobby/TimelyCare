@@ -97,6 +97,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.gitignore
 .env
 .venv
 env/
@@ -135,3 +136,8 @@ cython_debug/
 
 
 node_modules/
+.next/
+out/
+.vscode/
+dist/
+.cache/

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 import uuid
+from django.contrib.auth.hashers import make_password
+
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -45,6 +47,12 @@ class User(AbstractBaseUser):
     city = models.CharField(max_length=255, blank=True, null=True)
     country = models.CharField(max_length=255, blank=True, null=True)
     user_type = models.CharField(max_length=10, choices=USER_TYPES)
+
+    def save(self, *args, **kwargs):
+        if self.password_hash and not self.pk:
+            self.password_hash = make_password(self.password_hash)
+        super().save(*args, **kwargs)
+
     is_active = models.BooleanField(default=True)
     created_on = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)

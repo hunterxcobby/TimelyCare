@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os 
 from dotenv import load_dotenv
+import dj_database_url
 
 # Load environment variables from .env file
 load_dotenv()
@@ -120,6 +121,8 @@ DATABASES = {
     }
 }
 
+DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
+# 
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

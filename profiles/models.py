@@ -47,7 +47,6 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=255)
     date_of_birth = models.DateField()
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
-    password_hash = models.CharField(max_length=60)  # This should be a hashed password
     phone_number = models.CharField(max_length=255)
     street_address = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)
@@ -55,8 +54,8 @@ class User(AbstractBaseUser):
     user_type = models.CharField(max_length=10, choices=USER_TYPES)
 
     def save(self, *args, **kwargs):
-        if self.password_hash and not self.pk:
-            self.password_hash = make_password(self.password_hash)
+        if self.password and not self.pk:
+            self.password = make_password(self.password)
         super().save(*args, **kwargs)
 
     is_active = models.BooleanField(default=True)

@@ -12,25 +12,10 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/": [
+    "/Symptoms": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/index.js"
-    ],
-    "/Login": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Login.js"
-    ],
-    "/Login2": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Login2.js"
-    ],
-    "/Signup2": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Signup2.js"
+      "static/chunks/pages/Symptoms.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

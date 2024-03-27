@@ -70,9 +70,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
 
 ]
 
+# For Django admin site
+CSRF_COOKIE_SECURE = True  # Set to True if your site uses HTTPS
+CSRF_COOKIE_HTTPONLY = True  # Set to True for added security
+CSRF_COOKIE_SAMESITE = 'Lax'  # Adjust based on your requirements
 ROOT_URLCONF = 'timelycare.urls'
 
 TEMPLATES = [

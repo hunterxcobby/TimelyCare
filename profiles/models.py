@@ -41,7 +41,6 @@ class User(AbstractBaseUser):
     last_name = models.CharField(max_length=255)
     date_of_birth = models.DateField()
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
-    password_hash = models.CharField(max_length=60)  # This should be a hashed password
     phone_number = models.CharField(max_length=255)
     street_address = models.CharField(max_length=255, blank=True, null=True)
     city = models.CharField(max_length=255, blank=True, null=True)

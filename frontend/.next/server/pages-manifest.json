@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/_error": "pages/_error.js",
-  "/api/symptoms": "pages/api/symptoms.js",
-  "/Symptoms": "pages/Symptoms.js"
+  "/Signup": "pages/Signup.js",
+  "/Signup2": "pages/Signup2.js"
 }

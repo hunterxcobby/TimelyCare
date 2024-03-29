@@ -45,16 +45,23 @@ def get_patient(request, user_id):
         return Response({"message": "Patient not found."}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
-def get_specialization(request, specialization_id):
+def get_specialization(request, specialization_id=None):
     """
     Retrieve specialization by id.
+    If no specialization ID is provided, return all specializations.
     """
+    if specialization_id is None:
+        specializations = Specialization.objects.all()
+        specialization_serializer = SpecializationSerializer(specializations, many=True)
+        return Response(specialization_serializer.data)
+    
     try:
         specialization = Specialization.objects.get(id=specialization_id)
         specialization_serializer = SpecializationSerializer(specialization)
         return Response(specialization_serializer.data)
     except Specialization.DoesNotExist:
         return Response({"message": "Specialization not found."}, status=status.HTTP_404_NOT_FOUND)
+
 
 @api_view(['GET'])
 def get_specialist(request, user_id=None):

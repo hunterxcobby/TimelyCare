@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # For Django admin site

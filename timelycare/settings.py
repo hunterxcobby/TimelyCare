@@ -108,6 +108,11 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+# Add here your frontend URL
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
 
 WSGI_APPLICATION = 'timelycare.wsgi.application'
 

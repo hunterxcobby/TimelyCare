@@ -38,9 +38,19 @@ def add_user(request):
     """
     user_serializer = UserSerializer(data=request.data)
     if user_serializer.is_valid():
-        user_serializer.save()
+        user = user_serializer.save()
+        
+        # Check if the user is a specialist and create a Specialist instance
+        if user.user_type == 'Specialist':
+            Specialist.objects.create(user=user)
+        
+        # Check if the user is a patient and create a Patient instance
+        if user.user_type == 'Patient':
+            Patient.objects.create(user=user)
+        
         return Response(user_serializer.data, status=status.HTTP_201_CREATED)
     return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(['GET'])
 def get_patient(request, user_id=None):

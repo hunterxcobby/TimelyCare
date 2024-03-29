@@ -13,13 +13,23 @@ def index(request):
     return Response({"message": "Welcome to the profiles app."})
 
 @api_view(['GET'])
-def users(request):
+def users(request, user_id=None):
     """
-    Retrieve all users.
+    Retrieve users by user_id.
+    If no user ID is provided, return all users.
     """
-    users = User.objects.all()
-    user_serializer = UserSerializer(users, many=True)
-    return Response(user_serializer.data)
+    if user_id is None:
+        users = User.objects.all()
+        user_serializer = UserSerializer(users, many=True)
+        return Response(user_serializer.data)
+    
+    try:
+        user = User.objects.get(id=user_id)
+        user_serializer = UserSerializer(user)
+        return Response(user_serializer.data)
+    except User.DoesNotExist:
+        return Response({"message": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+
 
 @api_view(['POST'])
 def add_user(request):

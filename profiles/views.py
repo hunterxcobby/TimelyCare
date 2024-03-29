@@ -33,16 +33,23 @@ def add_user(request):
     return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-def get_patient(request, user_id):
+def get_patient(request, user_id=None):
     """
     Retrieve patient by user_id.
+    If no user ID is provided, return all patients.
     """
+    if user_id is None:
+        patients = Patient.objects.all()
+        patient_serializer = PatientSerializer(patients, many=True)
+        return Response(patient_serializer.data)
+    
     try:
         patient = Patient.objects.get(user_id=user_id)
         patient_serializer = PatientSerializer(patient)
         return Response(patient_serializer.data)
     except Patient.DoesNotExist:
         return Response({"message": "Patient not found."}, status=status.HTTP_404_NOT_FOUND)
+
 
 @api_view(['GET'])
 def get_specialization(request, specialization_id=None):

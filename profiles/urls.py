@@ -7,6 +7,7 @@ urlpatterns = [
    path('user/add/', views.add_user, name='add_user'),
    path('specialist/', views.get_specialist, name='get_specialist'),
    path('specialist/<int:user_id>/', views.get_specialist, name='get_specialist'),
+   path('patient/', views.get_patient, name='get_patient'),
    path('patient/<int:user_id>/', views.get_patient, name='get_patient'),
    path('specialization/', views.get_specialization, name='get_specialization'),
    path('specialization/<int:specialization_id>/', views.get_specialization, name='get_specialization'),

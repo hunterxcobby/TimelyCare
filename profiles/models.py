@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-import uuid
 from django.contrib.auth.hashers import make_password
-
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -48,9 +46,17 @@ class User(AbstractBaseUser):
     user_type = models.CharField(max_length=10, choices=USER_TYPES)
 
     def save(self, *args, **kwargs):
-        if self.password_hash and not self.pk:
-            self.password_hash = make_password(self.password_hash)
-        super().save(*args, **kwargs)
+        if self.password and not self.pk:
+            self.password = make_password(self.password)
+            super().save(*args, **kwargs)
+
+            # Automatically create Patient or Specialist instance based on user type
+            if self.user_type == 'Patient':
+                Patient.objects.create(user=self)
+            elif self.user_type == 'Specialist':
+                Specialist.objects.create(user=self)
+        else:
+            super().save(*args, **kwargs)
 
     is_active = models.BooleanField(default=True)
     created_on = models.DateField(auto_now_add=True)
@@ -65,12 +71,15 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     # Add other patient-specific fields here if needed
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+    
 
 class Specialization(models.Model):
     title = models.CharField(max_length=255)
@@ -78,35 +87,11 @@ class Specialization(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.title
+
 class Specialist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     specialization = models.ForeignKey(Specialization, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class MedicalHistory(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    past_diagnoses = models.TextField(blank=True, null=True)  # consider using standardized codes
-    allergies = models.TextField(blank=True, null=True)
-    medications = models.TextField(blank=True, null=True)
-    immunizations = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class EmergencyContact(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=255)
-    relationship = models.CharField(max_length=255, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class Symptom(models.Model):
-    symptom_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    symptom_type = models.CharField(max_length=255)
-    description = models.TextField()
-    body_area = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

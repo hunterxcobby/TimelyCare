@@ -13,13 +13,23 @@ def index(request):
     return Response({"message": "Welcome to the profiles app."})
 
 @api_view(['GET'])
-def users(request):
+def users(request, user_id=None):
     """
-    Retrieve all users.
+    Retrieve users by user_id.
+    If no user ID is provided, return all users.
     """
-    users = User.objects.all()
-    user_serializer = UserSerializer(users, many=True)
-    return Response(user_serializer.data)
+    if user_id is None:
+        users = User.objects.all()
+        user_serializer = UserSerializer(users, many=True)
+        return Response(user_serializer.data)
+    
+    try:
+        user = User.objects.get(id=user_id)
+        user_serializer = UserSerializer(user)
+        return Response(user_serializer.data)
+    except User.DoesNotExist:
+        return Response({"message": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+
 
 @api_view(['POST'])
 def add_user(request):
@@ -28,15 +38,31 @@ def add_user(request):
     """
     user_serializer = UserSerializer(data=request.data)
     if user_serializer.is_valid():
-        user_serializer.save()
+        user = user_serializer.save()
+        
+        # Check if the user is a specialist and create a Specialist instance
+        if user.user_type == 'Specialist':
+            Specialist.objects.create(user=user)
+        
+        # Check if the user is a patient and create a Patient instance
+        if user.user_type == 'Patient':
+            Patient.objects.create(user=user)
+        
         return Response(user_serializer.data, status=status.HTTP_201_CREATED)
     return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
-def get_patient(request, user_id):
+def get_patient(request, user_id=None):
     """
     Retrieve patient by user_id.
+    If no user ID is provided, return all patients.
     """
+    if user_id is None:
+        patients = Patient.objects.all()
+        patient_serializer = PatientSerializer(patients, many=True)
+        return Response(patient_serializer.data)
+    
     try:
         patient = Patient.objects.get(user_id=user_id)
         patient_serializer = PatientSerializer(patient)
@@ -44,11 +70,18 @@ def get_patient(request, user_id):
     except Patient.DoesNotExist:
         return Response({"message": "Patient not found."}, status=status.HTTP_404_NOT_FOUND)
 
+
 @api_view(['GET'])
-def get_specialization(request, specialization_id):
+def get_specialization(request, specialization_id=None):
     """
     Retrieve specialization by id.
+    If no specialization ID is provided, return all specializations.
     """
+    if specialization_id is None:
+        specializations = Specialization.objects.all()
+        specialization_serializer = SpecializationSerializer(specializations, many=True)
+        return Response(specialization_serializer.data)
+    
     try:
         specialization = Specialization.objects.get(id=specialization_id)
         specialization_serializer = SpecializationSerializer(specialization)
@@ -56,14 +89,24 @@ def get_specialization(request, specialization_id):
     except Specialization.DoesNotExist:
         return Response({"message": "Specialization not found."}, status=status.HTTP_404_NOT_FOUND)
 
+
 @api_view(['GET'])
-def get_specialist(request, user_id):
+def get_specialist(request, user_id=None):
     """
     Retrieve specialist by user_id.
+    If user_id is not provided, return all specialists.
     """
-    try:
-        specialist = Specialist.objects.get(user_id=user_id)
-        specialist_serializer = SpecialistSerializer(specialist)
-        return Response(specialist_serializer.data)
-    except Specialist.DoesNotExist:
-        return Response({"message": "Specialist not found."}, status=status.HTTP_404_NOT_FOUND)
+    if user_id is not None:
+        try:
+            specialist = Specialist.objects.get(user_id=user_id)
+            specialist_serializer = SpecialistSerializer(specialist)
+            return Response(specialist_serializer.data)
+        except Specialist.DoesNotExist:
+            return Response({"message": "Specialist not found."}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        specialists = Specialist.objects.all()
+        if specialists.exists():
+            specialist_serializer = SpecialistSerializer(specialists, many=True)
+            return Response(specialist_serializer.data)
+        else:
+            return Response({"message": "No specialists found."}, status=status.HTTP_404_NOT_FOUND)

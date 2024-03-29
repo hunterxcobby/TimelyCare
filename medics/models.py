@@ -14,6 +14,9 @@ class MedicalHistory(models.Model):
     immunizations = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f"{self.user.email}'s Medical History"
 
 class EmergencyContact(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -24,6 +27,9 @@ class EmergencyContact(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.name} ({self.relationship}) - {self.phone_number}"
+
 class Symptom(models.Model):
     symptom_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     symptom_type = models.CharField(max_length=255)
@@ -31,3 +37,7 @@ class Symptom(models.Model):
     body_area = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.symptom_type
+ 

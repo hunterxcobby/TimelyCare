@@ -1,5 +1,7 @@
 from django.db import models
 import uuid
+from profiles.models import User, Patient, Specialist, Symptom
+
 
 class Notification(models.Model):
     notification_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -9,6 +11,9 @@ class Notification(models.Model):
     sent_at = models.DateTimeField(auto_now_add=True)
     notification_type = models.CharField(max_length=255)
     is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"From: {self.sender.email} To: {self.receiver.email} Content: {self.content}"
 
 class Appointment(models.Model):
     APPOINTMENT_STATUS_CHOICES = [
@@ -27,3 +32,8 @@ class Appointment(models.Model):
     status = models.CharField(max_length=10, choices=APPOINTMENT_STATUS_CHOICES, default='Pending')
     notes = models.TextField(blank=True, null=True)
     meeting_room_id = models.CharField(max_length=255, blank=True, null=True)
+
+
+def __str__(self):
+    return f"Patient: {self.patient.user.email} Specialist: {self.specialist.user.email} Date: {self.date} Time: {self.time} Status: {self.status}"
+

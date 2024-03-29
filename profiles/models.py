@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-import uuid
 from django.contrib.auth.hashers import make_password
-
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -50,7 +48,15 @@ class User(AbstractBaseUser):
     def save(self, *args, **kwargs):
         if self.password and not self.pk:
             self.password = make_password(self.password)
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)
+
+            # Automatically create Patient or Specialist instance based on user type
+            if self.user_type == 'Patient':
+                Patient.objects.create(user=self)
+            elif self.user_type == 'Specialist':
+                Specialist.objects.create(user=self)
+        else:
+            super().save(*args, **kwargs)
 
     is_active = models.BooleanField(default=True)
     created_on = models.DateField(auto_now_add=True)
@@ -65,12 +71,15 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     # Add other patient-specific fields here if needed
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+    
 
 class Specialization(models.Model):
     title = models.CharField(max_length=255)
@@ -78,62 +87,18 @@ class Specialization(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.title
+
 class Specialist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     specialization = models.ForeignKey(Specialization, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class MedicalHistory(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    past_diagnoses = models.TextField(blank=True, null=True)  # consider using standardized codes
-    allergies = models.TextField(blank=True, null=True)
-    medications = models.TextField(blank=True, null=True)
-    immunizations = models.TextField(blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f" {self.user.last_name} {self.user.first_name}"
+    
 
-class EmergencyContact(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=255)
-    relationship = models.CharField(max_length=255, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-class Symptom(models.Model):
-    symptom_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    symptom_type = models.CharField(max_length=255)
-    description = models.TextField()
-    body_area = models.CharField(max_length=255, blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-class Notification(models.Model):
-    notification_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    sender = models.ForeignKey(User, related_name='sent_notifications', on_delete=models.CASCADE)
-    receiver = models.ForeignKey(User, related_name='received_notifications', on_delete=models.CASCADE)
-    content = models.TextField()
-    sent_at = models.DateTimeField(auto_now_add=True)
-    notification_type = models.CharField(max_length=255)
-    is_read = models.BooleanField(default=False)
-
-class Appointment(models.Model):
-    APPOINTMENT_STATUS_CHOICES = [
-        ('Pending', 'Pending'),
-        ('Confirmed', 'Confirmed'),
-        ('Completed', 'Completed'),
-        ('Canceled', 'Canceled'),
-    ]
-
-    appointment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    symptom = models.ForeignKey(Symptom, on_delete=models.CASCADE)
-    date = models.DateField()
-    time = models.TimeField()
-    status = models.CharField(max_length=10, choices=APPOINTMENT_STATUS_CHOICES, default='Pending')
-    notes = models.TextField(blank=True, null=True)
-    meeting_room_id = models.CharField(max_length=255, blank=True, null=True)

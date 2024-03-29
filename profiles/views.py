@@ -57,13 +57,22 @@ def get_specialization(request, specialization_id):
         return Response({"message": "Specialization not found."}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
-def get_specialist(request, user_id):
+def get_specialist(request, user_id=None):
     """
     Retrieve specialist by user_id.
+    If user_id is not provided, return all specialists.
     """
-    try:
-        specialist = Specialist.objects.get(user_id=user_id)
-        specialist_serializer = SpecialistSerializer(specialist)
-        return Response(specialist_serializer.data)
-    except Specialist.DoesNotExist:
-        return Response({"message": "Specialist not found."}, status=status.HTTP_404_NOT_FOUND)
+    if user_id is not None:
+        try:
+            specialist = Specialist.objects.get(user_id=user_id)
+            specialist_serializer = SpecialistSerializer(specialist)
+            return Response(specialist_serializer.data)
+        except Specialist.DoesNotExist:
+            return Response({"message": "Specialist not found."}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        specialists = Specialist.objects.all()
+        if specialists.exists():
+            specialist_serializer = SpecialistSerializer(specialists, many=True)
+            return Response(specialist_serializer.data)
+        else:
+            return Response({"message": "No specialists found."}, status=status.HTTP_404_NOT_FOUND)

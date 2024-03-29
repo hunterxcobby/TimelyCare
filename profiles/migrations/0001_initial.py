@@ -23,7 +23,6 @@ class Migration(migrations.Migration):
                 ('last_name', models.CharField(max_length=255)),
                 ('date_of_birth', models.DateField()),
                 ('gender', models.CharField(choices=[('Male', 'Male'), ('Female', 'Female')], max_length=6)),
-                ('password_hash', models.CharField(max_length=60)),
                 ('phone_number', models.CharField(max_length=255)),
                 ('street_address', models.CharField(blank=True, max_length=255, null=True)),
                 ('city', models.CharField(blank=True, max_length=255, null=True)),

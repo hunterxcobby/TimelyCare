@@ -48,8 +48,8 @@ class User(AbstractBaseUser):
     user_type = models.CharField(max_length=10, choices=USER_TYPES)
 
     def save(self, *args, **kwargs):
-        if self.password_hash and not self.pk:
-            self.password_hash = make_password(self.password_hash)
+        if self.password and not self.pk:
+            self.password = make_password(self.password)
         super().save(*args, **kwargs)
 
     is_active = models.BooleanField(default=True)

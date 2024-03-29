@@ -1,16 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-import uuid
 from django.contrib.auth.hashers import make_password
-
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email field must be set')
-        if not password:
-            raise ValueError('The Password field must be set')
-
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -18,11 +13,6 @@ class CustomUserManager(BaseUserManager):
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError('The Email field must be set')
-        if not password:
-            raise ValueError('The Password field must be set')
-
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
 
@@ -58,7 +48,15 @@ class User(AbstractBaseUser):
     def save(self, *args, **kwargs):
         if self.password and not self.pk:
             self.password = make_password(self.password)
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)
+
+            # Automatically create Patient or Specialist instance based on user type
+            if self.user_type == 'Patient':
+                Patient.objects.create(user=self)
+            elif self.user_type == 'Specialist':
+                Specialist.objects.create(user=self)
+        else:
+            super().save(*args, **kwargs)
 
     is_active = models.BooleanField(default=True)
     created_on = models.DateField(auto_now_add=True)
@@ -73,18 +71,24 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     # Add other patient-specific fields here if needed
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"{self.user.first_name} {self.user.last_name}"
+    
+
 class Specialization(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)  # Optional field
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
 
 class Specialist(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)

@@ -1,4 +1,7 @@
 from django.db import models
+from profiles.models import User
+import uuid
+
 
 # Create your models here.
 

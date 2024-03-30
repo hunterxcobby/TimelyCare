@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +72,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # For Django admin site
@@ -109,9 +110,8 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 # Add here your frontend URL
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-]
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 
 WSGI_APPLICATION = 'timelycare.wsgi.application'

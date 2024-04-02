@@ -68,6 +68,7 @@ def update_symptom(request, symptom_id):
 def delete_symptom(request, symptom_id):
     """
     Delete a symptom.
+    
     """
     if request.method == 'DELETE':
         try:

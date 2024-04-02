@@ -102,3 +102,39 @@ def medical_history(request, history_id=None):
             return Response(history_serializer.data)
     else:
         return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['POST'])
+def add_medical_history(request):
+    """
+    Add a new medical history.
+    """
+    if request.method == 'POST':
+        history_serializer = MedicalHistorySerializer(data=request.data)
+        if history_serializer.is_valid():
+            history = history_serializer.save()
+            return Response(history_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(history_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT']) 
+def update_medical_history(request, history_id):
+    """
+    Update a medical history.
+    """
+    if request.method == 'PUT':
+        try:
+            history = MedicalHistory.objects.get(id=history_id)
+        except MedicalHistory.DoesNotExist:
+            return Response("Medical history not found.", status=status.HTTP_404_NOT_FOUND)
+        
+        history_serializer = MedicalHistorySerializer(history, data=request.data)
+        if history_serializer.is_valid():
+            history = history_serializer.save()
+            return Response(history_serializer.data)
+        return Response(history_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+    
+

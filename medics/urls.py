@@ -11,5 +11,5 @@ urlpatterns = [
     path('medical-history/<int:history_id>/', views.medical_history, name='history'),
     path('medical-history/add/', views.add_medical_history, name='add_medical_history'),
     path('medical-history/update/<int:history_id>/', views.update_medical_history, name='update_medical_history'),
-#     path('medical-history/delete/<int:history_id>/', views.delete_medical_history, name='delete_medical_history'),
+    path('medical-history/delete/<int:history_id>/', views.delete_medical_history, name='delete_medical_history'),
 ]

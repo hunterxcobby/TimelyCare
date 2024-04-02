@@ -43,7 +43,7 @@ def create_appointment(request):
         return Response(appointment_serializer.data, status=status.HTTP_201_CREATED)
     return Response(appointment_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-api_view(['GET'])
+@api_view(['GET'])
 def notifications(request):
     """
     Retrieve all notifications.
@@ -61,4 +61,5 @@ def create_notification(request):
     if notification_serializer.is_valid():
         notification_serializer.save()
         return Response(notification_serializer.data, status=status.HTTP_201_CREATED)
-    return Response(notification_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(notification_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

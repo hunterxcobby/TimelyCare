@@ -27,3 +27,18 @@ def symptoms(request, symptom_id=None):
             return Response(symptom_serializer.data)
     else:
         return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def add_symptom(request):
+    """
+    Add a new symptom.
+    """
+    if request.method == 'POST':
+        symptom_serializer = SymptomSerializer(data=request.data)
+        if symptom_serializer.is_valid():
+            symptom = symptom_serializer.save()
+            return Response(symptom_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(symptom_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)

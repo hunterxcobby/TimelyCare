@@ -62,3 +62,20 @@ def update_symptom(request, symptom_id):
         return Response(symptom_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['DELETE'])
+def delete_symptom(request, symptom_id):
+    """
+    Delete a symptom.
+    """
+    if request.method == 'DELETE':
+        try:
+            symptom = Symptom.objects.get(symptom_id=symptom_id)
+        except Symptom.DoesNotExist:
+            return Response("Symptom not found.", status=status.HTTP_404_NOT_FOUND)
+        
+        symptom.delete()
+        return Response("Symptom deleted.", status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)

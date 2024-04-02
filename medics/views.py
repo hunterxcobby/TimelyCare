@@ -138,3 +138,18 @@ def update_medical_history(request, history_id):
         return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
     
 
+@api_view(['DELETE'])
+def delete_medical_history(request, history_id):
+    """
+    Delete a medical history.
+    """
+    if request.method == 'DELETE':
+        try:
+            history = MedicalHistory.objects.get(id=history_id)
+        except MedicalHistory.DoesNotExist:
+            return Response("Medical history not found.", status=status.HTTP_404_NOT_FOUND)
+        
+        history.delete()
+        return Response("Medical history deleted.", status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)

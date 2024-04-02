@@ -12,4 +12,9 @@ urlpatterns = [
     path('medical-history/add/', views.add_medical_history, name='add_medical_history'),
     path('medical-history/update/<int:history_id>/', views.update_medical_history, name='update_medical_history'),
     path('medical-history/delete/<int:history_id>/', views.delete_medical_history, name='delete_medical_history'),
+    path('emergency-contacts/', views.emergency_contacts, name='emergency_contacts'),
+    path('emergency-contacts/<int:contact_id>/', views.emergency_contacts, name='emergency_contact'),
+    path('emergency-contacts/add/', views.add_emergency_contact, name='add_emergency_contact'),
+    path('emergency-contacts/update/<int:contact_id>/', views.update_emergency_contact, name='update_emergency_contact'),
+    path('emergency-contacts/delete/<int:contact_id>/', views.delete_emergency_contact, name='delete_emergency_contact'),
 ]

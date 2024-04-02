@@ -1,6 +1,7 @@
 from django.db import models
 import uuid
-from profiles.models import User, Patient, Specialist, Symptom
+from profiles.models import User, Patient, Specialist
+from medics.models import Symptom
 
 
 class Notification(models.Model):

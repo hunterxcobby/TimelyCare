@@ -60,6 +60,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
     'corsheaders',
+    'medics',
+    'appointments',
+
 ]
 
 MIDDLEWARE = [

@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Symptom, MedicalHistory
-from .serializers import SymptomSerializer, MedicalHistorySerializer
+from .models import Symptom, MedicalHistory, EmergencyContact
+from .serializers import SymptomSerializer, MedicalHistorySerializer, EmergencyContactSerializer
 # Create your views here.
 
 @api_view(['GET'])
@@ -151,5 +151,80 @@ def delete_medical_history(request, history_id):
         
         history.delete()
         return Response("Medical history deleted.", status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+def emergency_contact(request, contact_id=None):
+    """
+    Retrieve emergency contact.
+    """
+    if request.method == 'GET':
+        contact_id = request.GET.get('id')
+        if contact_id:
+            try:
+                contact = EmergencyContact.objects.get(id=contact_id)
+                contact_serializer = EmergencyContactSerializer(contact)
+                return Response(contact_serializer.data)
+            except EmergencyContact.DoesNotExist:
+                return Response("Emergency contact not found.", status=status.HTTP_404_NOT_FOUND)
+        else:
+            contacts = EmergencyContact.objects.all()
+            contact_serializer = EmergencyContactSerializer(contacts, many=True)
+            return Response(contact_serializer.data)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def add_emergency_contact(request):
+    """
+    Add a new emergency contact.
+    """
+    if request.method == 'POST':
+        contact_serializer = EmergencyContactSerializer(data=request.data)
+        if contact_serializer.is_valid():
+            contact = contact_serializer.save()
+            return Response(contact_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(contact_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def update_emergency_contact(request, contact_id):
+    """
+    Update an emergency contact.
+    """
+    if request.method == 'PUT':
+        try:
+            contact = EmergencyContact.objects.get(id=contact_id)
+        except EmergencyContact.DoesNotExist:
+            return Response("Emergency contact not found.", status=status.HTTP_404_NOT_FOUND)
+
+        contact_serializer = EmergencyContactSerializer(contact, data=request.data)
+        if contact_serializer.is_valid():
+            contact = contact_serializer.save()
+            return Response(contact_serializer.data)
+        return Response(contact_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def delete_emergency_contact(request, contact_id):
+    """
+    Delete an emergency contact.
+    """
+    if request.method == 'DELETE':
+        try:
+            contact = EmergencyContact.objects.get(id=contact_id)
+        except EmergencyContact.DoesNotExist:
+            return Response("Emergency contact not found.", status=status.HTTP_404_NOT_FOUND)
+
+        contact.delete()
+        return Response("Emergency contact deleted.", status=status.HTTP_204_NO_CONTENT)
     else:
         return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)

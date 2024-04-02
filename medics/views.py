@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Symptom
-from .serializers import SymptomSerializer
+from .models import Symptom, MedicalHistory
+from .serializers import SymptomSerializer, MedicalHistorySerializer
 # Create your views here.
 
 @api_view(['GET'])
@@ -78,5 +78,27 @@ def delete_symptom(request, symptom_id):
         
         symptom.delete()
         return Response("Symptom deleted.", status=status.HTTP_204_NO_CONTENT)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+    
+
+@api_view(['GET'])
+def medical_history(request, history_id=None):
+    """
+    Retrieve medical history.
+    """
+    if request.method == 'GET':
+        history_id = request.GET.get('id')
+        if history_id:
+            try:
+                history = MedicalHistory.objects.get(id=history_id)
+                history_serializer = MedicalHistorySerializer(history)
+                return Response(history_serializer.data)
+            except MedicalHistory.DoesNotExist:
+                return Response("Medical history not found.", status=status.HTTP_404_NOT_FOUND)
+        else:
+            history = MedicalHistory.objects.all()
+            history_serializer = MedicalHistorySerializer(history, many=True)
+            return Response(history_serializer.data)
     else:
         return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)

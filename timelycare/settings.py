@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'django_nextjs.apps.DjangoNextJSConfig',
     'rest_framework',
     'profiles',
+    'appointments',
+    'medics',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',

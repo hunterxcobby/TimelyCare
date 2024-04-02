@@ -42,3 +42,23 @@ def add_symptom(request):
         return Response(symptom_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def update_symptom(request, symptom_id):
+    """
+    Update a symptom.
+    """
+    if request.method == 'PUT':
+        try:
+            symptom = Symptom.objects.get(symptom_id=symptom_id)
+        except Symptom.DoesNotExist:
+            return Response("Symptom not found.", status=status.HTTP_404_NOT_FOUND)
+        
+        symptom_serializer = SymptomSerializer(symptom, data=request.data)
+        if symptom_serializer.is_valid():
+            symptom = symptom_serializer.save()
+            return Response(symptom_serializer.data)
+        return Response(symptom_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response("Invalid request method.", status=status.HTTP_400_BAD_REQUEST)

@@ -38,6 +38,10 @@ def add_user(request):
     """
     user_serializer = UserSerializer(data=request.data)
     if user_serializer.is_valid():
+        # Check if the user already exists
+        if User.objects.filter(username=request.data['email']).exists():
+            return Response({"message": "User already exists."}, status=status.HTTP_409_CONFLICT)
+        
         user = user_serializer.save()
         
         # Check if the user is a specialist and create a Specialist instance

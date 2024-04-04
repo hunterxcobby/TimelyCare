@@ -157,7 +157,7 @@ export default function Example() {
                   htmlFor="user_type"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Usert Type
+                  User Type
                 </label>
 
                 <select
@@ -167,8 +167,8 @@ export default function Example() {
                   required
                 >
                   <option value="">Select user type</option>
-                  <option value="specialist">Specialist</option>
-                  <option value="patient">Patient</option>
+                  <option value="Specialist">Specialist</option>
+                  <option value="Patient">Patient</option>
                 </select>
               </div>
               <div>
@@ -191,7 +191,7 @@ export default function Example() {
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-one hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md stext-sm font-medium text-white bg-one hover:bg-indigo-700 "
                 >
                   Sign Up
                 </button>

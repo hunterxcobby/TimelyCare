@@ -66,12 +66,7 @@ export default function Navbar() {
               >
                 Home
               </a>
-              <a
-                href="//About"
-                className="text-base font-medium text-black hover:text-gray-900"
-              >
-                About
-              </a>
+            
 
               <Popover className="relative">
                 {({ open }) => (
@@ -91,7 +86,7 @@ export default function Navbar() {
             </Popover.Group>
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
               <a
-                href="#"
+                href="/Login"
                 className="whitespace-nowrap text-base font-medium text-black hover:text-gray-900"
               >
                 Sign in

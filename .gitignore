@@ -98,7 +98,7 @@ celerybeat.pid
 
 # Environments
 .gitignore
-.env
+#.env
 .venv
 env/
 venv/

@@ -98,7 +98,7 @@ celerybeat.pid
 
 # Environments
 .gitignore
-#.env
+.env
 .venv
 env/
 venv/
@@ -131,8 +131,8 @@ dmypy.json
 cython_debug/
 
 # Ignore all local .env files
-#**/.env
-#**/.env.*
+**/.env
+**/.env.*
 
 
 node_modules/

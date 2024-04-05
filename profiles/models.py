@@ -81,20 +81,26 @@ class Patient(models.Model):
         return f"{self.user.first_name} {self.user.last_name}"
     
 
-class Specialization(models.Model):
-    id = models.UUIDField(primary_key=True, editable=False)
-    title = models.CharField(max_length=255)
-    description = models.TextField(blank=True, null=True)
+class Specialist(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    # Add other specialist-specific fields here if needed
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class Specialist(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    specialization = models.ForeignKey(Specialization, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
+    
+
+class Specialization(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name  
+
+
 
 

@@ -55,6 +55,8 @@ INSTALLED_APPS = [
     'django_nextjs.apps.DjangoNextJSConfig',
     'rest_framework',
     'profiles',
+    'appointments',
+    'medics',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -131,7 +133,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
+#DATABASES['default'] = dj_database_url.parse(os.getenv('DATABASE_URL'))
 # 
 
 # Password validation

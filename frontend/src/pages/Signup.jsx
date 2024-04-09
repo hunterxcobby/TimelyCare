@@ -1,13 +1,9 @@
 import axios from "axios";
 
-
-
-
 export default function Example() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Get form data
     const formData = new FormData(event.target);
     const signUpDetails = {
       firstname: formData.get("first_name"),
@@ -20,24 +16,23 @@ export default function Example() {
       dateofbirth: formData.get("date_of_birth"),
     };
 
-    // Log sign-up details
-
     try {
-      const response = await axios.post('https://timelycare.onrender.com/user/add', signUpDetails);
-      console.log('Sign-up successful:', response.data);
+      const response = await axios.post(
+        "https://timelycare.onrender.com/user/add",
+        signUpDetails
+      );
+      console.log("Sign-up successful:", response.data);
       window.location.reload();
     } catch (error) {
-      console.error('Error signing up:', error);
-      console.log('Sign-up details:', signUpDetails);
+      console.error("Error signing up:", error);
+      console.log("Sign-up details:", signUpDetails);
     }
-    
   };
   return (
     <>
-      {/*  sign-up form code */}
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl font-play font-extrabold text-gray-900">
             Sign up as a Specialist
             <a
               href="/Signup2"
@@ -46,7 +41,10 @@ export default function Example() {
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Or{" "}
-            <a href="/Signup2" className="font-medium text-one hover:text-two">
+            <a
+              href="/Signup2"
+              className="font-medium text-one font-play hover:text-two"
+            >
               patient
             </a>
           </p>
@@ -58,7 +56,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="first_name"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   First Name
                 </label>
@@ -73,7 +71,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="last_name"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   Last Name
                 </label>
@@ -88,7 +86,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   Email
                 </label>
@@ -103,7 +101,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   Password
                 </label>
@@ -118,7 +116,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="gender"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   Gender
                 </label>
@@ -126,7 +124,7 @@ export default function Example() {
                 <select
                   id="gender"
                   name="gender"
-                  className="input-field block w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="input-field block w-full px-2 py-2 border border-gray-300  font-play rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   required
                 >
                   <option value="">Select gender</option>
@@ -137,7 +135,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="phone_number"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   Phone Number
                 </label>
@@ -155,7 +153,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="user_type"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   User Type
                 </label>
@@ -163,7 +161,7 @@ export default function Example() {
                 <select
                   id="user_type"
                   name="user_type"
-                  className="input-field block w-full px-2 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="input-field block w-full px-2 py-2 border border-gray-300 rounded-md font-play shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   required
                 >
                   <option value="">Select user type</option>
@@ -174,7 +172,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="date_of_birth"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   Date of birth
                 </label>
@@ -187,11 +185,10 @@ export default function Example() {
                   required
                 />
               </div>
-              {/* Other input fields... */}
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md stext-sm font-medium text-white bg-one hover:bg-indigo-700 "
+                  className="w-full flex justify-center py-2 px-4 border border-transparent font-play rounded-md stext-sm font-medium text-white bg-one hover:bg-indigo-700 "
                 >
                   Sign Up
                 </button>

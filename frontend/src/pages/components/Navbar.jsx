@@ -27,7 +27,7 @@ export default function Navbar() {
       <Popover className="relative bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center py-6 md:justify-start md:space-x-30">
-            <div className="flex justify-start lg:w-0 lg:flex-1 text-base text-xl text-two hover:text-two">
+            <div className="flex justify-start lg:w-0 lg:flex-1 text-base text-xl font-play text-two hover:text-two">
               <a href="#"></a>
               Timely Care
             </div>
@@ -62,7 +62,7 @@ export default function Navbar() {
 
               <a
                 href="/"
-                className="text-base font-medium text-black hover:text-gray-900"
+                className="text-base font-medium text-black font-play hover:text-gray-900"
               >
                 Home
               </a>
@@ -87,13 +87,13 @@ export default function Navbar() {
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
               <a
                 href="/Login"
-                className="whitespace-nowrap text-base font-medium text-black hover:text-gray-900"
+                className="whitespace-nowrap text-base font-play font-medium text-black hover:text-gray-900"
               >
                 Sign in
               </a>
               <a
                 href="/Signup"
-                className="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
+                className="ml-8 whitespace-nowrap inline-flex  font-play items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
               >
                 Sign up
               </a>
@@ -117,7 +117,7 @@ export default function Navbar() {
             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
               <div className="pt-5 pb-6 px-5">
                 <div className="flex items-center justify-between">
-                  <div className="flex justify-start lg:w-0 lg:flex-1 text-base font-medium text-two text-xl hover:text-gray-700">
+                  <div className="flex justify-start lg:w-0 lg:flex-1 font-play text-base font-medium text-two text-xl hover:text-gray-700">
                     <a href="#"></a>
                     Timely Care
                   </div>
@@ -136,22 +136,22 @@ export default function Navbar() {
               <div className="py-6 px-5 space-y-6">
                 <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                   <a
-                    href="/About"
-                    className="text-base font-medium text-gray-900 hover:text-gray-700"
+                    href="/"
+                    className="text-base font-medium text-gray-900 font-play hover:text-gray-700"
                   >
-                    About Us
+                    Home
                   </a>
                 </div>
                 <div>
                   <a
                     href="/Signup"
-                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
+                    className="w-full flex items-center justify-center font-play px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
                   >
                     Sign up
                   </a>
-                  <p className="mt-6 text-center text-base font-medium text-gray-500">
+                  <p className="mt-6 text-center text-base font-medium font-play text-gray-500">
                     Existing patient?
-                    <a href="#" className="text-two hover:text-indigo-500">
+                    <a href="#" className="text-two font-play hover:text-indigo-500">
                       Sign in
                     </a>
                   </p>

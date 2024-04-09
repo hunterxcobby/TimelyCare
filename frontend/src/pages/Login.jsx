@@ -29,7 +29,7 @@ export default function Example() {
           
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
               
-            <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            <h2 className="mt-6 text-center font-play text-3xl font-extrabold text-gray-900">
               Login as a Specialist 
               <a href="/Login2" className="font-medium text-one hover:text-two">
                
@@ -37,7 +37,7 @@ export default function Example() {
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{" "}
-              <a href="/Login2" className="font-medium text-one hover:text-two">
+              <a href="/Login2" className="font-medium text-one font-play hover:text-two">
                 patient
               </a>
             </p>
@@ -54,7 +54,7 @@ export default function Example() {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium font-play text-gray-700"
                   >
                     Specialist ID
                   </label>
@@ -72,7 +72,7 @@ export default function Example() {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium font-play text-gray-700"
                   >
                     Password
                   </label>
@@ -91,7 +91,7 @@ export default function Example() {
                 <div>
                   <button
                     type="submit"
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-one hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="w-full flex justify-center py-2 px-4 border border-transparent font-play rounded-md shadow-sm text-sm font-medium text-white bg-one hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Sign Up
                   </button>

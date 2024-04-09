@@ -19,6 +19,9 @@ module.exports = {
       'three': '#D8C4B6',
       'four': '#F5EFE7',
     },
+    fontFamily: {
+      play: ["Nunito", "sans-serif"],
+    },
   },
   plugins: [],
 }

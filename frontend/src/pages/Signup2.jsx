@@ -1,30 +1,8 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
 export default function Example() {
   return (
     <>
-      {/*
-          This example requires updating your template:
-  
-          ```
-          <html class="h-full bg-gray-50">
-          <body class="h-full">
-          ```
-        */}
+     
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
             
@@ -36,7 +14,7 @@ export default function Example() {
             </h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or{" "}
-              <a href="/Signup" className="font-medium text-one hover:text-two">
+              <a href="/Signup" className="font-medium font-play text-one hover:text-two">
                 Specialist
               </a>
             </p>
@@ -48,7 +26,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   First Name
                 </label>
@@ -67,7 +45,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   Email
                 </label>
@@ -85,7 +63,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   Address
                 </label>
@@ -103,7 +81,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium font-play text-gray-700"
                 >
                   Phone Number
                 </label>
@@ -121,7 +99,7 @@ export default function Example() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium  font-play text-gray-700"
                 >
                   Gender
                 </label>

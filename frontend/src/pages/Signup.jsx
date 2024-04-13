@@ -1,33 +1,48 @@
+import { Fragment, useState } from "react";
+import { Transition } from "@headlessui/react";
+import {
+  ExclamationCircleIcon,
+  CheckCircleIcon,
+} from "@heroicons/react/outline";
+import { XIcon } from "@heroicons/react/solid";
 import axios from "axios";
 
-export default function Example() {
+export default function SignUpPage() {
+  const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const signUpDetails = {
-      firstname: formData.get("first_name"),
-      lastname: formData.get("last_name"),
+      first_name: formData.get("first_name"),
+      last_name: formData.get("last_name"),
       email: formData.get("email"),
       password: formData.get("password"),
-      phonenumber: formData.get("phone_number"),
-      usertype: formData.get("user_type"),
+      phone_number: formData.get("phone_number"),
+      country: formData.get("country"),
+      city: formData.get("city"),
+      user_type: formData.get("user_type"),
       gender: formData.get("gender"),
-      dateofbirth: formData.get("date_of_birth"),
+      date_of_birth: formData.get("date_of_birth"),
+      country: formData.get("country"),
+      city: formData.get("city"),
     };
-
+    console.log("Sign-up details:", signUpDetails);
     try {
       const response = await axios.post(
         "https://timelycare.onrender.com/user/add",
         signUpDetails
       );
+
       console.log("Sign-up successful:", response.data);
-      window.location.reload();
     } catch (error) {
       console.error("Error signing up:", error);
-      console.log("Sign-up details:", signUpDetails);
+      setShowError(true);
     }
   };
+
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -78,6 +93,36 @@ export default function Example() {
                 <input
                   id="last_name"
                   name="last_name"
+                  type="text"
+                  className="input-field appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="last_name"
+                  className="block text-sm font-medium font-play text-gray-700"
+                >
+                  Country
+                </label>
+                <input
+                  id="country"
+                  name="country"
+                  type="text"
+                  className="input-field appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="last_name"
+                  className="block text-sm font-medium font-play text-gray-700"
+                >
+                  City
+                </label>
+                <input
+                  id="city"
+                  name="city"
                   type="text"
                   className="input-field appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   required
@@ -142,7 +187,7 @@ export default function Example() {
 
                 <input
                   id="phone_number"
-                  name="phone"
+                  name="phone_number"
                   type="tel"
                   pattern="[0-9]*"
                   className="input-field block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -194,6 +239,106 @@ export default function Example() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+
+      {/* Error notification */}
+      <div
+        aria-live="assertive"
+        className={`fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start ${
+          showError ? "" : "hidden"
+        }`}
+      >
+        <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
+          <Transition
+            show={showError}
+            as={Fragment}
+            enter="transform ease-out duration-300 transition"
+            enterFrom="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+            enterTo="translate-y-0 opacity-100 sm:translate-x-0"
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+              <div className="p-4">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <ExclamationCircleIcon
+                      className="h-6 w-6 text-red-400"
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="ml-3 w-0 flex-1 pt-0.5">
+                    <p className="text-sm font-medium font-play  text-gray-900">
+                      Error signing up!
+                    </p>
+                    <p className="mt-1 text-sm font-play  text-gray-500">
+                      Please try again.
+                    </p>
+                  </div>
+                  <div className="ml-4 flex-shrink-0 flex">
+                    <button
+                      className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      onClick={() => setShowError(false)}
+                    >
+                      <span className="sr-only">Close</span>
+                      <XIcon className="h-5 w-5" aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Transition>
+        </div>
+        <div
+          aria-live="assertive"
+          className={`fixed inset-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start ${
+            showSuccess ? "" : "hidden"
+          }`}
+        >
+          <div className="w-full flex flex-col items-center space-y-4 sm:items-end">
+            <Transition
+              show={showSuccess}
+              as={Fragment}
+              enter="transform ease-out duration-300 transition"
+              enterFrom="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+              enterTo="translate-y-0 opacity-100 sm:translate-x-0"
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+                <div className="p-4">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0">
+                      <CheckCircleIcon
+                        className="h-6 w-6 text-green-400"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div className="ml-3 w-0 flex-1 pt-0.5">
+                      <p className="text-sm font-medium font-play  text-gray-900">
+                        Sign-up successful!
+                      </p>
+                      <p className="mt-1 text-sm font-play  text-gray-500">
+                        You can now login with your credentials.
+                      </p>
+                    </div>
+                    <div className="ml-4 flex-shrink-0 flex">
+                      <button
+                        className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        onClick={() => setShowSuccess(false)}
+                      >
+                        <span className="sr-only">Close</span>
+                        <XIcon className="h-5 w-5" aria-hidden="true" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Transition>
           </div>
         </div>
       </div>

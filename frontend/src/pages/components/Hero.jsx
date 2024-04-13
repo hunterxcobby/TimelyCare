@@ -1,6 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { ExternalLinkIcon } from '@heroicons/react/solid'
-
+import Link from 'next/link'
 export default function Example() {
   return (
     <div className="relative bg-white">
@@ -20,13 +20,13 @@ export default function Example() {
           </p>
           <div className="mt-8">
             <div className="inline-flex rounded-md shadow">
-              <a
+              <Link
                 href="#"
                 className="inline-flex items-center justify-center px-5 py-3   text-base font-medium rounded-md text-white bg-one font-play hover:bg-gray-300"
               >
                 Get Started
                 <ExternalLinkIcon className="-mr-1 ml-3 h-5 w-5 text-white" aria-hidden="true" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

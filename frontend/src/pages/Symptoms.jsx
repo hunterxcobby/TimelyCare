@@ -7,15 +7,28 @@ export default function SymptomsPage() {
   const [suggestions, setSuggestions] = useState(Array(4).fill([])); 
 
   const handleChange = (index, event, { newValue }) => {
- 
     setSymptoms(
       symptoms.map((symptom, i) => (i === index ? newValue : symptom))
     );
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(symptoms); 
+
+    try {
+      // Prepare data to be sent to the backend
+      const userData = {
+        profile: "", // 
+        symptoms: symptoms,
+      };
+
+      
+      const response = await axios.post("/api/user/symptoms", userData);
+
+      console.log("Symptoms submitted successfully:", response.data);
+    } catch (error) {
+      console.error("Error submitting symptoms:", error,);
+    }
   };
 
   const fetchSuggestions = async (index, value) => {

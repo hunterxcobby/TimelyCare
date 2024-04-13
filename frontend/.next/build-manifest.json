@@ -12,20 +12,15 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/": [
+    "/Login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/index.js"
+      "static/chunks/pages/Login.js"
     ],
-    "/Patientslist": [
+    "/Profile": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Patientslist.js"
-    ],
-    "/Signup": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Signup.js"
+      "static/chunks/pages/Profile.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

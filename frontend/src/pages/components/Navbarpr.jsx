@@ -85,17 +85,12 @@ export default function Navbar() {
               </Popover>
             </Popover.Group>
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-              <Link
-                href="/Login"
-                className="whitespace-nowrap text-base font-play font-medium text-black hover:text-gray-900"
-              >
-                Sign in
-              </Link>
+             
               <Link
                 href="/Signup"
                 className="ml-8 whitespace-nowrap inline-flex  font-play items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
               >
-                Sign up
+                Log Out
               </Link>
             </div>
           </div>
@@ -143,16 +138,12 @@ export default function Navbar() {
                   </Link>
                 </div>
                 <div>
-                  <Link
-                    href="/Signup"
-                    className="w-full flex items-center justify-center font-play px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
-                  >
-                    Sign up
-                  </Link>
+                 
+                 
                   <p className="mt-6 text-center text-base font-medium font-play text-gray-500">
                     Existing patient?
                     <Link href="#" className="text-two font-play hover:text-indigo-500">
-                      Sign in
+                      Log Out
                     </Link>
                   </p>
                 </div>

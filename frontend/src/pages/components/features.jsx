@@ -1,6 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { AnnotationIcon, GlobeAltIcon, LightningBoltIcon, MailIcon, ScaleIcon, CheckIcon, ClockIcon} from '@heroicons/react/outline'
-
+import Link from 'next/link'
 const transferFeatures = [
   {
     id: 1,

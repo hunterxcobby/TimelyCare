@@ -1,4 +1,4 @@
-
+import Link from "next/link"
 
   export default function Example() {
     return (
@@ -19,11 +19,11 @@
           <h1 className="text-l font-bold font-play mb-1">Solomon Cobby Sefah</h1>
           <ul className="grid grid-cols-1 gap-4 font-play sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <li>
-            <a href="LINK_TO_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</a> |
-              <a href="LINK_TO_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</a> | 
-              <a href="LINK_TO_TWITTER_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</a>
+            <Link href="LINK_TO_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</Link> |
+              <Link href="LINK_TO_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</Link> | 
+              <Link href="LINK_TO_TWITTER_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</Link>
             </li>
-            {/* Repeat the above list item for each team member */}
+          
           </ul>
         </div>
         <div className="mt-12">
@@ -31,11 +31,11 @@
           <h1 className="text-l font-bold font-play mb-1">Abdirahman Abdi</h1>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <li>
-              <a href="LINK_TO_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</a> | 
-              <a href="LINK_TO_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</a> | 
-              <a href="LINK_TO_TWITTER_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</a>
+              <Link href="LINK_TO_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</Link> | 
+              <Link href="LINK_TO_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</Link> | 
+              <Link href="LINK_TO_TWITTER_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</Link>
             </li>
-            {/* Repeat the above list item for each team member */}
+            
           </ul>
         </div>
         <div className="mt-12">
@@ -43,17 +43,17 @@
           <h1 className="text-l font-bold font-play mb-1">Adebayo Ifeoluwa</h1>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <li>
-              <a href="LINK_TO_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</a> | 
-              <a href="LINK_TO_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</a> | 
-              <a href="LINK_TO_TWITTER_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</a>
+              <Link href="LINK_TO_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</Link> | 
+              <Link href="LINK_TO_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</Link> | 
+              <Link href="LINK_TO_TWITTER_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</Link>
             </li>
-            {/* Repeat the above list item for each team member */}
+          
           </ul>
         </div>
         <div className="mt-8 text-center">
-          <a href="LINK_TO_GITHUB_REPO" target="_blank" rel="noopener noreferrer" className="inline-block bg-one py-2 px-4 border border-transparent rounded-md text-base font-play font-medium text-white hover:bg-indigo-700">
+          <Link href="LINK_TO_GITHUB_REPO" target="_blank" rel="noopener noreferrer" className="inline-block bg-one py-2 px-4 border border-transparent rounded-md text-base font-play font-medium text-white hover:bg-indigo-700">
             View GitHub Repository
-          </a>
+          </Link>
         </div>
       </div>
     </div>

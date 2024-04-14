@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import User, Patient, Specialization, Specialist
 from .serializers import UserSerializer, PatientSerializer, SpecializationSerializer, SpecialistSerializer
+from django.db import transaction
 
 @api_view(['GET'])
 def index(request):
@@ -34,23 +35,40 @@ def users(request, user_id=None):
 @api_view(['POST'])
 def add_user(request):
     """
-    Create a new user.
+    Create a new user and create a corresponding Patient or Specialist based on the user type.
     """
-    user_serializer = UserSerializer(data=request.data)
-    if user_serializer.is_valid():
-        user = user_serializer.save()
-        
-        # Check if the user is a specialist and create a Specialist instance
-        if user.user_type == 'Specialist':
-            Specialist.objects.create(user=user)
-        
-        # Check if the user is a patient and create a Patient instance
-        if user.user_type == 'Patient':
-            Patient.objects.create(user=user)
-        
-        return Response(user_serializer.data, status=status.HTTP_201_CREATED)
-    return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    with transaction.atomic():
+        user_serializer = UserSerializer(data=request.data)
+        if user_serializer.is_valid():
+            user = user_serializer.save()
+            user_type = request.data.get('user_type')
 
+            if user_type == 'Specialist':
+                # Handle specialist creation
+                specialization_id = request.data.get('specialization_id')
+                if specialization_id is None:
+                    return Response({"message": "Specialization ID required for Specialist."}, status=status.HTTP_400_BAD_REQUEST)
+
+                try:
+                    specialization = Specialization.objects.get(id=specialization_id)
+                    if not Specialist.objects.filter(user=user).exists():
+                        specialist = Specialist.objects.create(user=user, specialization=specialization)
+                        specialist_serializer = SpecialistSerializer(specialist)
+                    else:
+                        return Response({"message": "Specialist with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
+                except Specialization.DoesNotExist:
+                    return Response({"message": f"Specialization with ID {specialization_id} not found."}, status=status.HTTP_404_NOT_FOUND)
+                
+            elif user_type == 'Patient':
+                # Handle patient creation
+                if not Patient.objects.filter(user=user).exists():
+                    patient = Patient.objects.create(user=user)
+                    patient_serializer = PatientSerializer(patient)
+                else:
+                    return Response({"message": "Patient with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
+
+            return Response(user_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def get_patient(request, user_id=None):

@@ -34,23 +34,39 @@ def users(request, user_id=None):
 @api_view(['POST'])
 def add_user(request):
     """
-    Create a new user.
+    Create a new user and create a corresponding Patient or Specialist based on the user type.
     """
     user_serializer = UserSerializer(data=request.data)
     if user_serializer.is_valid():
         user = user_serializer.save()
-        
-        # Check if the user is a specialist and create a Specialist instance
+
         if user.user_type == 'Specialist':
-            Specialist.objects.create(user=user)
+            # Ensure specialization_id is provided for specialist
+            specialization_id = request.data.get('specialization_id')
+            if specialization_id is None:
+                return Response({"message": "Specialization ID required for Specialist."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Check if the Specialist already exists
+            if not Specialist.objects.filter(user=user).exists():
+                try:
+                    specialization = Specialization.objects.get(id=specialization_id)
+                    specialist = Specialist.objects.create(user=user, specialization=specialization)
+                    specialist_serializer = SpecialistSerializer(specialist)
+                except Specialization.DoesNotExist:
+                    return Response({"message": "Specialization not found."}, status=status.HTTP_404_NOT_FOUND)
+            else:
+                return Response({"message": "Specialist with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
         
-        # Check if the user is a patient and create a Patient instance
-        if user.user_type == 'Patient':
-            Patient.objects.create(user=user)
-        
+        elif user.user_type == 'Patient':
+            # Check if the Patient already exists
+            if not Patient.objects.filter(user=user).exists():
+                patient = Patient.objects.create(user=user)
+                patient_serializer = PatientSerializer(patient)
+            else:
+                return Response({"message": "Patient with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
+
         return Response(user_serializer.data, status=status.HTTP_201_CREATED)
     return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['GET'])
 def get_patient(request, user_id=None):

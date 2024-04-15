@@ -54,6 +54,7 @@ def add_user(request):
                     if not Specialist.objects.filter(user=user).exists():
                         specialist = Specialist.objects.create(user=user, specialization=specialization)
                         specialist_serializer = SpecialistSerializer(specialist)
+                        specialist_serializer.save()  # Save the specialist object
                     else:
                         return Response({"message": "Specialist with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
                 except Specialization.DoesNotExist:
@@ -64,6 +65,7 @@ def add_user(request):
                 if not Patient.objects.filter(user=user).exists():
                     patient = Patient.objects.create(user=user)
                     patient_serializer = PatientSerializer(patient)
+                    patient_serializer.save()  # Save the patient object
                 else:
                     return Response({"message": "Patient with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
 

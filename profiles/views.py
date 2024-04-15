@@ -61,11 +61,14 @@ def add_user(request):
                 
             elif user_type == 'Patient':
                 # Handle patient creation
-                if not Patient.objects.filter(user=user).exists():
-                    patient = Patient.objects.create(user=user)
-                    patient_serializer = PatientSerializer(patient)
-                else:
-                    return Response({"message": "Patient with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
+                try:
+                    if not Patient.objects.filter(user=user).exists():
+                        patient = Patient.objects.create(user=user)
+                        patient_serializer = PatientSerializer(patient)
+                    else:
+                        return Response({"message": "Patient with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
+                except Exception as e:
+                    print(f"Error creating patient: {str(e)}")
 
             return Response(user_serializer.data, status=status.HTTP_201_CREATED)
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)

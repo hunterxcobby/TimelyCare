@@ -49,12 +49,6 @@ class User(AbstractBaseUser):
         if self.password and not self.pk:
             self.password = make_password(self.password)
             super().save(*args, **kwargs)
-
-            # Automatically create Patient or Specialist instance based on user type
-            if self.user_type == 'Patient':
-                Patient.objects.create(user=self)
-            elif self.user_type == 'Specialist':
-                Specialist.objects.create(user=self)
         else:
             super().save(*args, **kwargs)
 
@@ -77,6 +71,10 @@ class Patient(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            super().save(*args, **kwargs)
+
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
     
@@ -86,6 +84,10 @@ class Specialist(models.Model):
     # Add other specialist-specific fields here if needed
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"

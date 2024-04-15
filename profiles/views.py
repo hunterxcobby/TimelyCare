@@ -45,12 +45,12 @@ def add_user(request):
 
             if user_type == 'Specialist':
                 # Handle specialist creation
-                specialization_id = request.data.get('specialization_id')
-                if specialization_id is None:
-                    return Response({"message": "Specialization ID required for Specialist."}, status=status.HTTP_400_BAD_REQUEST)
+                specialization_title = request.data.get('specialization_title')
+                if specialization_title is None:
+                    return Response({"message": "Specialization title required for Specialist."}, status=status.HTTP_400_BAD_REQUEST)
 
                 try:
-                    specialization = Specialization.objects.get(id=specialization_id)
+                    specialization = Specialization.objects.get(title=specialization_title)
                     if not Specialist.objects.filter(user=user).exists():
                         specialist = Specialist.objects.create(user=user, specialization=specialization)
                         specialist_serializer = SpecialistSerializer(specialist)
@@ -58,7 +58,7 @@ def add_user(request):
                     else:
                         return Response({"message": "Specialist with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
                 except Specialization.DoesNotExist:
-                    return Response({"message": f"Specialization with ID {specialization_id} not found."}, status=status.HTTP_404_NOT_FOUND)
+                    return Response({"message": f"Specialization with title '{specialization_title}' not found."}, status=status.HTTP_404_NOT_FOUND)
                 
             elif user_type == 'Patient':
                 # Handle patient creation

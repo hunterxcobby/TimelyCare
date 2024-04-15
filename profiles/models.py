@@ -72,7 +72,7 @@ class User(AbstractBaseUser):
         return self.email
 
 class Patient(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, unique=True)
     # Add other patient-specific fields here if needed
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -82,7 +82,7 @@ class Patient(models.Model):
     
 
 class Specialist(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, unique=True)
     # Add other specialist-specific fields here if needed
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

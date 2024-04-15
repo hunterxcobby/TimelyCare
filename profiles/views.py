@@ -54,6 +54,7 @@ def add_user(request):
                     if not Specialist.objects.filter(user=user).exists():
                         specialist = Specialist.objects.create(user=user, specialization=specialization)
                         specialist_serializer = SpecialistSerializer(specialist)
+                        return Response(specialist_serializer.data, status=status.HTTP_201_CREATED)
                     else:
                         return Response({"message": "Specialist with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
                 except Specialization.DoesNotExist:
@@ -61,16 +62,14 @@ def add_user(request):
                 
             elif user_type == 'Patient':
                 # Handle patient creation
-                try:
-                    if not Patient.objects.filter(user=user).exists():
-                        patient = Patient.objects.create(user=user)
-                        patient_serializer = PatientSerializer(patient)
-                    else:
-                        return Response({"message": "Patient with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
-                except Exception as e:
-                    print(f"Error creating patient: {str(e)}")
+                # will handle the issue with duplicate keys here
+                if not Patient.objects.filter(user=user).exists():
+                    patient = Patient.objects.create(user=user)
+                    patient_serializer = PatientSerializer(patient)
+                    return Response(patient_serializer.data, status=status.HTTP_201_CREATED)
+                else:
+                    return Response({"message": "User created successfully."}, status=status.HTTP_201_CREATED)
 
-            return Response(user_serializer.data, status=status.HTTP_201_CREATED)
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])

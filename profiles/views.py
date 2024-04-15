@@ -54,10 +54,7 @@ def add_user(request):
                     if not Specialist.objects.filter(user=user).exists():
                         specialist = Specialist.objects.create(user=user, specialization=specialization)
                         specialist_serializer = SpecialistSerializer(specialist)
-                        if specialist_serializer.is_valid():
-                            specialist_serializer.save()  # Save the specialist object
-                        else:
-                            return Response(specialist_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    else:
                         return Response({"message": "Specialist with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
                 except Specialization.DoesNotExist:
                     return Response({"message": f"Specialization with ID {specialization_id} not found."}, status=status.HTTP_404_NOT_FOUND)
@@ -66,11 +63,7 @@ def add_user(request):
                 # Handle patient creation
                 if not Patient.objects.filter(user=user).exists():
                     patient = Patient.objects.create(user=user)
-                    patient_serializer = PatientSerializer(data=request.data)
-                    if patient_serializer.is_valid():
-                        patient_serializer.save()  # Save the patient object
-                    else:
-                        return Response(patient_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    patient_serializer = PatientSerializer(patient)
                 else:
                     return Response({"message": "Patient with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
 

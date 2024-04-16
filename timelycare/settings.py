@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
     'corsheaders',
     'knox',
+    'accounts',
 ]
 
 MIDDLEWARE = [

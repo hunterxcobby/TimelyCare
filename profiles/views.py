@@ -45,29 +45,22 @@ def add_user(request):
 
             if user_type == 'Specialist':
                 # Handle specialist creation
-                specialization_id = request.data.get('specialization_id')
-                if specialization_id is None:
-                    return Response({"message": "Specialization ID required for Specialist."}, status=status.HTTP_400_BAD_REQUEST)
-
-                try:
-                    specialization = Specialization.objects.get(id=specialization_id)
-                    if not Specialist.objects.filter(user=user).exists():
-                        specialist = Specialist.objects.create(user=user, specialization=specialization)
-                        specialist_serializer = SpecialistSerializer(specialist)
-                    else:
-                        return Response({"message": "Specialist with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
-                except Specialization.DoesNotExist:
-                    return Response({"message": f"Specialization with ID {specialization_id} not found."}, status=status.HTTP_404_NOT_FOUND)
-                
+                if not Specialist.objects.filter(user=user).exists():
+                    specialist = Specialist.objects.create(user=user)
+                    specialist_serializer = SpecialistSerializer(specialist)
+                    return Response(specialist_serializer.data, status=status.HTTP_201_CREATED)
+                else:
+                     return Response({"message": "User created successfully as a specialist."}, status=status.HTTP_201_CREATED)
             elif user_type == 'Patient':
                 # Handle patient creation
+                # will handle the issue with duplicate keys here
                 if not Patient.objects.filter(user=user).exists():
                     patient = Patient.objects.create(user=user)
                     patient_serializer = PatientSerializer(patient)
+                    return Response(patient_serializer.data, status=status.HTTP_201_CREATED)
                 else:
-                    return Response({"message": "Patient with this user already exists."}, status=status.HTTP_400_BAD_REQUEST)
+                    return Response({"message": "User created successfully as a patient."}, status=status.HTTP_201_CREATED)
 
-            return Response(user_serializer.data, status=status.HTTP_201_CREATED)
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])

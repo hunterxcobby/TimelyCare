@@ -1,4 +1,5 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/router";
 import { Transition } from "@headlessui/react";
 import {
   ExclamationCircleIcon,
@@ -6,10 +7,11 @@ import {
 } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 import axios from "axios";
-
+import { Fragment } from "react";
 export default function SignUpPage() {
   const [showError, setShowError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const router = useRouter(); // Use Next.js router
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,19 +24,24 @@ export default function SignUpPage() {
       password: formData.get("password"),
       phone_number: formData.get("phone_number"),
       country: formData.get("country"),
+      street_address: formData.get("street_address"),
       city: formData.get("city"),
       user_type: formData.get("user_type"),
       gender: formData.get("gender"),
       date_of_birth: formData.get("date_of_birth"),
-      country: formData.get("country"),
-      city: formData.get("city"),
     };
-    console.log("Sign-up details:", signUpDetails);
+
     try {
       const response = await axios.post(
-        "https://timelycare.onrender.com/user/add",
+        "https://timelycare.onrender.com/user/add/",
         signUpDetails
       );
+
+      setShowSuccess(true);
+      setShowError(false);
+
+     
+      router.push("/Login");
 
       console.log("Sign-up successful:", response.data);
     } catch (error) {
@@ -42,7 +49,6 @@ export default function SignUpPage() {
       setShowError(true);
     }
   };
-
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -130,6 +136,21 @@ export default function SignUpPage() {
               </div>
               <div>
                 <label
+                  htmlFor="last_name"
+                  className="block text-sm font-medium font-play text-gray-700"
+                >
+                  Address
+                </label>
+                <input
+                  id="street_address"
+                  name="street_address"
+                  type="text"
+                  className="input-field appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  required
+                />
+              </div>
+              <div>
+                <label
                   htmlFor="email"
                   className="block text-sm font-medium font-play text-gray-700"
                 >
@@ -173,8 +194,8 @@ export default function SignUpPage() {
                   required
                 >
                   <option value="">Select gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
                 </select>
               </div>
               <div>

@@ -25,7 +25,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/login", formData);
+      const response = await axios.post("https://timelycare.onrender.com/user/add/", formData);
       console.log("Login successful:", response.data);
       setShowSuccess(true);
     } catch (error) {

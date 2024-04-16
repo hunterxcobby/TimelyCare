@@ -121,3 +121,41 @@ def get_specialist(request, user_id=None):
             return Response(specialist_serializer.data)
         else:
             return Response({"message": "No specialists found."}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['PUT'])
+def update_user(request, user_id):
+    """
+    Update user by user_id.
+    """
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response({"message": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    user_serializer = UserSerializer(user, data=request.data, partial=True)
+    if user_serializer.is_valid():
+        user_serializer.save()
+        return Response(user_serializer.data)
+    return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def login(request):
+    """
+    Login endpoint for the profiles app.
+    """
+    email = request.data.get('email')
+    password = request.data.get('password')
+
+    try:
+        user = User.objects.get(email=email)
+    except User.DoesNotExist:
+        return Response({"message": "User not found."}, status=status.HTTP_404_NOT_FOUND)
+
+    if user.check_password(password):
+        user_serializer = UserSerializer(user)
+        return Response(user_serializer.data)
+    else:
+        return Response({"message": "Incorrect password."}, status=status.HTTP_400_BAD_REQUEST)
+    

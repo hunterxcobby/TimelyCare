@@ -147,6 +147,7 @@ def login(request):
     """
     email = request.data.get('email')
     password = request.data.get('password')
+    user_type = request.data.get('user_type')
 
     try:
         user = User.objects.get(email=email)
@@ -154,8 +155,13 @@ def login(request):
         return Response({"message": "User not found."}, status=status.HTTP_404_NOT_FOUND)
 
     if user.check_password(password):
-        user_serializer = UserSerializer(user)
-        return Response(user_serializer.data)
+        if user_type == 'Specialist':
+            # Redirect to specialist page
+            return Response({"message": "Redirect to specialist page."})
+        elif user_type == 'Patient':
+            # Redirect to patient page
+            return Response({"message": "Redirect to patient page."})
+        else:
+            return Response({"message": "Invalid user type."}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({"message": "Incorrect password."}, status=status.HTTP_400_BAD_REQUEST)
-    

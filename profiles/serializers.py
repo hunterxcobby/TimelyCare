@@ -20,7 +20,6 @@ class SpecializationSerializer(serializers.ModelSerializer):
 
 class SpecialistSerializer(serializers.ModelSerializer):
     user = UserSerializer()
-    specialization = SpecializationSerializer()
 
     class Meta:
         model = Specialist

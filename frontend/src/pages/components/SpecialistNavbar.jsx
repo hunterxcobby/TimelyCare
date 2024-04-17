@@ -17,11 +17,12 @@ import {
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import Link from "next/link";
+const { isLoggedIn, logout } = useAuth();
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Navbar() {
+export default function SpecialistNavbar() {
   return (
     <div className="relative bg-gray-50">
       <Popover className="relative bg-white shadow">
@@ -89,13 +90,13 @@ export default function Navbar() {
                 href="/Login"
                 className="whitespace-nowrap text-base font-play font-medium text-black hover:text-gray-900"
               >
-                Sign in
+                My Profile Specialist
               </Link>
               <Link
-                href="/Signup"
+                href="/"
                 className="ml-8 whitespace-nowrap inline-flex  font-play items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
               >
-                Sign up
+                Log Out
               </Link>
             </div>
           </div>
@@ -144,15 +145,15 @@ export default function Navbar() {
                 </div>
                 <div>
                   <Link
-                    href="/Signup"
+                    href="/Profile"
                     className="w-full flex items-center justify-center font-play px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
                   >
-                    Sign up
+                    My Profile
                   </Link>
                   <p className="mt-6 text-center text-base font-medium font-play text-gray-500">
                     Existing patient?
-                    <Link href="/Login" className="text-two font-play hover:text-indigo-500">
-                      Sign in
+                    <Link href="#" className="text-two font-play hover:text-indigo-500">
+                     Log Out
                     </Link>
                   </p>
                 </div>

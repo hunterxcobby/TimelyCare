@@ -16,6 +16,7 @@ Django==5.0.4
 django-allauth==0.61.1
 django-cors-headers==4.3.1
 django-nextjs==2.4.0
+django-rest-knox==4.2.0
 djangorestframework==3.14.0
 frozenlist==1.4.1
 gunicorn==21.2.0

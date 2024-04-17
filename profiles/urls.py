@@ -5,6 +5,7 @@ urlpatterns = [
    path('', views.index, name='index'),
    path('users/', views.users, name='users'),
    path('user/add/', views.add_user, name='add_user'),
+   path('user/update/<int:user_id>/', views.update_user, name='update_user'),
    path('specialist/', views.get_specialist, name='get_specialist'),
    path('specialist/<int:user_id>/', views.get_specialist, name='get_specialist'),
    path('patient/', views.get_patient, name='get_patient'),

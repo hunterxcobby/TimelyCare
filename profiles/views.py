@@ -165,3 +165,4 @@ def login(request):
             return Response({"message": "Invalid user type."}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response({"message": "Incorrect password."}, status=status.HTTP_400_BAD_REQUEST)
+    

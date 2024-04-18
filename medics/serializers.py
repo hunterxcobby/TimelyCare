@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import MedicalHistory, EmergencyContact, Symptom
+from .models import MedicalHistory, EmergencyContact
 
 class MedicalHistorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,9 +9,4 @@ class MedicalHistorySerializer(serializers.ModelSerializer):
 class EmergencyContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmergencyContact
-        fields = '__all__'
-
-class SymptomSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Symptom
         fields = '__all__'

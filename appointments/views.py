@@ -26,7 +26,7 @@ def appointments(request, appointment_id=None):
         return Response(appointment_serializer.data)
     
     try:
-        appointment = Appointment.objects.get(id=appointment_id)
+        appointment = Appointment.objects.get(appointment_id=appointment_id)
         appointment_serializer = AppointmentSerializer(appointment)
         return Response(appointment_serializer.data)
     except Appointment.DoesNotExist:

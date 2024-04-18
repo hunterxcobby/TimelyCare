@@ -26,14 +26,13 @@ class Appointment(models.Model):
     appointment_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     specialist = models.ForeignKey(Specialist, on_delete=models.CASCADE)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    symptom = models.ForeignKey(Symptom, on_delete=models.CASCADE)
+    symptom_type = models.CharField(max_length=255, default='General')
+    symptom_description = models.TextField(default='How Exactly do you feel')
     date = models.DateField()
     time = models.TimeField()
     status = models.CharField(max_length=10, choices=APPOINTMENT_STATUS_CHOICES, default='Pending')
-    notes = models.TextField(blank=True, null=True)
-    meeting_room_id = models.CharField(max_length=255, blank=True, null=True)
+    #notes = models.TextField(blank=True, null=True)
 
 
 def __str__(self):
     return f"Patient: {self.patient.user.email} Specialist: {self.specialist.user.email} Date: {self.date} Time: {self.time} Status: {self.status}"
-

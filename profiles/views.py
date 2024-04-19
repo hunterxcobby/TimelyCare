@@ -159,12 +159,12 @@ def login(request):
             specialist_info = {
                 "id": user.id
             }
-            return Response({"message": "Redirect to specialist page.", "user_info": specialist_info})
+            return Response({"user_info": specialist_info})
         elif user_type == 'Patient':
             patient_info = {
                 "id": user.id
             }
-            return Response({"message": "Redirect to patient page.", "user_info": patient_info})
+            return Response({"user_info": patient_info})
         else:
             return Response({"message": "Invalid user type."}, status=status.HTTP_400_BAD_REQUEST)
     else:

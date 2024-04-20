@@ -1,15 +1,16 @@
-// layouts/SpecialistLayout.js
-import SpecialistNavbar from "../components/SpecialistNavbar";
-import Footer from "../components/Footer";
+import React from 'react';
+import { useAuth } from '../AuthContext';
+import SpecialistNavbar from '../components/SpecialistNavbar';
+import Footer from '../components/Footer';
+import Homepage from '../Homepage';
 
 function SpecialistLayout({ children }) {
+  const { userType } = useAuth();
+
   return (
     <div>
-      <SpecialistNavbar />
-      <div>
-        <h2>Success</h2>
-      </div>
-      <Footer />
+     <SpecialistNavbar/>
+     {children}
     </div>
   );
 }

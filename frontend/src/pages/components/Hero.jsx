@@ -1,7 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { ExternalLinkIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
+import Image from 'next/image'
 export default function Example() {
+  
   return (
     <div className="relative bg-white">
       <div className="h-56 bg-indigo-600 sm:h-72 md:absolute md:left-0 md:h-full md:w-1/2">

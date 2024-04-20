@@ -23,8 +23,8 @@ export default function SignUpPage() {
       email: formData.get("email"),
       password: formData.get("password"),
       phone_number: formData.get("phone_number"),
-      country: formData.get("country"),
-      street_address: formData.get("street_address"),
+       country: formData.get("country"),
+       street_address: formData.get("street_address"),
       city: formData.get("city"),
       user_type: formData.get("user_type"),
       gender: formData.get("gender"),
@@ -32,6 +32,9 @@ export default function SignUpPage() {
     };
 
     try {
+      // Log the sign-up details
+      console.log("Sign-up details:", signUpDetails);
+
       const response = await axios.post(
         "https://timelycare.onrender.com/user/add/",
         signUpDetails
@@ -40,7 +43,6 @@ export default function SignUpPage() {
       setShowSuccess(true);
       setShowError(false);
 
-     
       router.push("/Login");
 
       console.log("Sign-up successful:", response.data);
@@ -49,24 +51,25 @@ export default function SignUpPage() {
       setShowError(true);
     }
   };
+
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-play font-extrabold text-gray-900">
-            Sign up as a Specialist
+            Sign up
             <a
               href="/Signup2"
               className="font-medium text-one hover:text-two"
             ></a>
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
+          <p className="mt-2 text-center font-play text-sm text-gray-600">
             Or{" "}
             <a
-              href="/Signup2"
+              href="/Login"
               className="font-medium text-one font-play hover:text-two"
             >
-              patient
+              login
             </a>
           </p>
         </div>
@@ -104,7 +107,7 @@ export default function SignUpPage() {
                   required
                 />
               </div>
-              <div>
+               <div>
                 <label
                   htmlFor="last_name"
                   className="block text-sm font-medium font-play text-gray-700"
@@ -148,7 +151,7 @@ export default function SignUpPage() {
                   className="input-field appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   required
                 />
-              </div>
+              </div> 
               <div>
                 <label
                   htmlFor="email"
@@ -210,7 +213,7 @@ export default function SignUpPage() {
                   id="phone_number"
                   name="phone_number"
                   type="tel"
-                  pattern="[0-9]*"
+                  pattern="\+?[0-9]*"
                   className="input-field block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                   placeholder="Enter your phone number"
                   required

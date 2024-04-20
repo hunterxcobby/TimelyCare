@@ -1,4 +1,3 @@
-
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import {
@@ -15,14 +14,35 @@ import {
   ViewGridIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@heroicons/react/solid";
+
 import Link from "next/link";
-const { isLoggedIn, logout } = useAuth();
+import { useAuth } from "../AuthContext";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+// Destructure logout from useAuth
+function LogoutButton() {
+  const { logout } = useAuth();
+  const router = useRouter();
 
-export default function SpecialistNavbar() {
+  const handleLogout = async () => {
+    await logout();
+    router.push("/");
+  };
+
+  return (
+    <button
+      onClick={handleLogout}
+      className="ml-8 whitespace-nowrap inline-flex  font-play items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
+    >
+      Log Out
+    </button>
+  );
+}
+export default function PatientNavbar() {
+  const { logout } = useAuth();
   return (
     <div className="relative bg-gray-50">
       <Popover className="relative bg-white shadow">
@@ -62,12 +82,17 @@ export default function SpecialistNavbar() {
               </Popover>
 
               <Link
-                href="/"
+                href="/Specialist/dashboard"
                 className="text-base font-medium text-black font-play hover:text-gray-900"
               >
                 Home
               </Link>
-            
+              <Link
+                href="/Specialist/Patientslist"
+                className="text-base font-medium text-black font-play hover:text-gray-900"
+              >
+                Patients list
+              </Link>
 
               <Popover className="relative">
                 {({ open }) => (
@@ -87,17 +112,13 @@ export default function SpecialistNavbar() {
             </Popover.Group>
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
               <Link
-                href="/Login"
+                href="/Specialist/Profile"
                 className="whitespace-nowrap text-base font-play font-medium text-black hover:text-gray-900"
               >
-                My Profile Specialist
+                My Profile
               </Link>
-              <Link
-                href="/"
-                className="ml-8 whitespace-nowrap inline-flex  font-play items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
-              >
-                Log Out
-              </Link>
+
+              <LogoutButton />
             </div>
           </div>
         </div>
@@ -137,25 +158,33 @@ export default function SpecialistNavbar() {
               <div className="py-6 px-5 space-y-6">
                 <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                   <Link
-                    href="/"
+                    href="/Specialist/dashboard"
                     className="text-base font-medium text-gray-900 font-play hover:text-gray-700"
                   >
                     Home
                   </Link>
                 </div>
+                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                  <Link
+                    href="/Specialist/Patientslist"
+                    className="text-base font-medium text-black font-play hover:text-gray-900"
+                  >
+                    Patients list
+                  </Link>
+                </div>
+
                 <div>
                   <Link
-                    href="/Profile"
+                    href="/Specialist/Profile"
                     className="w-full flex items-center justify-center font-play px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
                   >
                     My Profile
                   </Link>
-                  <p className="mt-6 text-center text-base font-medium font-play text-gray-500">
-                    Existing patient?
-                    <Link href="#" className="text-two font-play hover:text-indigo-500">
-                     Log Out
-                    </Link>
-                  </p>
+                  <div>
+                    <p className="mt-6 text-center text-base font-medium font-play text-gray-500">
+                      <LogoutButton />
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

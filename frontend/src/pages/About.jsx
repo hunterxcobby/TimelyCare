@@ -1,4 +1,4 @@
-/* This example requires Tailwind CSS v2.0+ */
+
 const faqs = [
   {
     id: 1,
@@ -19,7 +19,7 @@ const faqs = [
       "Your health is our priority. TimelyCare is not just a service; it's a commitment to empower individuals seeking specialist care. We believe that everyone deserves timely access to quality healthcare, and we're here to make that a reality.",
   },
 
-  // More questions...
+
 ];
 
 export default function Example() {

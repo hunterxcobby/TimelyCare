@@ -1,8 +1,8 @@
-// ProtectedRoute.js
-// A wrapper component to guard access to certain routes based on authentication and user type
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useAuth } from "./AuthContext";
+import useAuth from "./AuthContext";
+import PatientNavbar from "./components/PatientNavbar";
+import SpecialistNavbar from "./components/SpecialistNavbar";
 
 function ProtectedRoute({ children }) {
   const router = useRouter();
@@ -10,10 +10,8 @@ function ProtectedRoute({ children }) {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      
       router.push("/login");
     } else {
-
       if (userType === "Patient") {
         router.push("/Patient/dashboard");
       } else if (userType === "Specialist") {
@@ -22,7 +20,9 @@ function ProtectedRoute({ children }) {
     }
   }, [isLoggedIn, userType, router]);
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+    </>
+  );
 }
-
-export default ProtectedRoute;

@@ -6,14 +6,14 @@ const transferFeatures = [
     id: 1,
     name: 'Accurate Symptoms',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Our platform uses advanced algorithms to provide the most accurate symptom analysis based on your inputs.',
     icon: CheckIcon,
   },
   {
     id: 2,
     name: 'Save Time',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+   ' No more waiting in long queues. Get instant health analysis at the comfort of your home.',
     icon: ClockIcon,
   },
   
@@ -23,14 +23,14 @@ const communicationFeatures = [
     id: 1,
     name: 'Mobile notifications',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'Stay updated with real-time notifications about your health status directly on your mobile device.',
     icon: AnnotationIcon,
   },
   {
     id: 2,
     name: 'Reminder emails',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+      'sStay updated with email reminders for your appointments.',
     icon: MailIcon,
   },
 ]

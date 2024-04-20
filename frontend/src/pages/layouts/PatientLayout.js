@@ -1,17 +1,14 @@
-// layouts/PatientLayout.js
 import PatientNavbar from "../components/PatientNavbar";
+import Homepage from "../Homepage";
 import Footer from "../components/Footer";
 
-function PatientLayout({ children }) {
+export default function PatientLayout({ children }) {
   return (
     <div>
-      <PatientNavbar />
-      <div>
-      <h2>Success</h2>
+      <PatientNavbar/>
+      {children}
+     
+   
       </div>
-      <Footer />
-    </div>
   );
 }
-
-export default PatientLayout;

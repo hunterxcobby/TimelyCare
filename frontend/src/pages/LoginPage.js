@@ -1,13 +1,12 @@
-// pages/index.js
-// Landing page or login page
+
 import LoginPage from "./Login";
-import { useAuth } from "./AuthContext";
+import  useAuth  from "./AuthContext";
 
 function LoginPages() {
   const { login } = useAuth();
 
   const handleLogin = (userType) => {
-    // Perform login logic here
+    
     login(userType);
   };
 

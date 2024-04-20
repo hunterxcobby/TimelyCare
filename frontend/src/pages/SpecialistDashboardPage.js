@@ -1,5 +1,4 @@
-// pages/specialist/dashboard.js
-// Specialist dashboard page
+
 import ProtectedRoute from "../../components/ProtectedRoute";
 import SpecialistLayout from "../../layouts/SpecialistLayout";
 

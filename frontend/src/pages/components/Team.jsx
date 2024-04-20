@@ -18,10 +18,10 @@ import Link from "next/link"
           <h3 className="text-xl font-bold font-play mb-2">Meet Our Team:</h3>
           <h1 className="text-l font-bold font-play mb-1">Solomon Cobby Sefah</h1>
           <ul className="grid grid-cols-1 gap-4 font-play sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            <li>
-            <Link href="LINK_TO_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</Link> |
-              <Link href="LINK_TO_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</Link> | 
-              <Link href="LINK_TO_TWITTER_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</Link>
+          <li>
+              <Link href="https://www.linkedin.com/in/hunterxcobby" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</Link> | 
+              <Link href="https://github.com/hunterxcobby" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</Link> | 
+              <Link href="https://x.com/hunterxcobby?t=3tVeQUiyQR7pqVKzbj9wqg&s=09" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</Link>
             </li>
           
           </ul>
@@ -31,9 +31,9 @@ import Link from "next/link"
           <h1 className="text-l font-bold font-play mb-1">Abdirahman Abdi</h1>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <li>
-              <Link href="LINK_TO_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</Link> | 
-              <Link href="LINK_TO_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</Link> | 
-              <Link href="LINK_TO_TWITTER_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</Link>
+              <Link href="https://www.linkedin.com/in/abdirahman-abdi-7ab9ba240/" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</Link> | 
+              <Link href="https://github.com/abdirahmanmohamedabdi" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</Link> | 
+              <Link href="https://twitter.com/Abdirahman_m_a" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</Link>
             </li>
             
           </ul>
@@ -43,15 +43,15 @@ import Link from "next/link"
           <h1 className="text-l font-bold font-play mb-1">Adebayo Ifeoluwa</h1>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <li>
-              <Link href="LINK_TO_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</Link> | 
-              <Link href="LINK_TO_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</Link> | 
-              <Link href="LINK_TO_TWITTER_PROFILE" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</Link>
+              <Link href="https://www.linkedin.com/in/techlord5" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline">LinkedIn</Link> | 
+              <Link href="https://github.com/TechLord05" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> GitHub</Link> | 
+              <Link href="https://x.com/_Techlord?t=3tVeQUiyQR7pqVKzbj9wqg&s=09" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-play hover:underline"> Twitter</Link>
             </li>
           
           </ul>
         </div>
         <div className="mt-8 text-center">
-          <Link href="LINK_TO_GITHUB_REPO" target="_blank" rel="noopener noreferrer" className="inline-block bg-one py-2 px-4 border border-transparent rounded-md text-base font-play font-medium text-white hover:bg-indigo-700">
+          <Link href="https://github.com/hunterxcobby/TimelyCare" target="_blank" rel="noopener noreferrer" className="inline-block bg-one py-2 px-4 border border-transparent rounded-md text-base font-play font-medium text-white hover:bg-indigo-700">
             View GitHub Repository
           </Link>
         </div>

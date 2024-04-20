@@ -1,24 +1,23 @@
-import { useState } from "react";
-import { AuthProvider } from "./AuthContext";
+import { AuthProvider, useAuth } from "./AuthContext";
 import "@/styles/globals.css";
+import { useRouter } from "next/router";
 import Navbar from "./components/Navbar";
+import PatientNavbar from "./components/PatientNavbar"; // Import PatientNavbar
+import SpecialistNavbar from "./components/SpecialistNavbar"; // Import SpecialistNavbar
 import Head from "next/head";
-import Footer from "./components/footer";
+import Footer from "./components/Footer";
 
-export default function App({ Component, pageProps }) {
-  const [userType, setUserType] = useState("");
+function MyApp({ Component, pageProps }) {
+  const router = useRouter();
 
   return (
-    <>
     <AuthProvider>
       <Head></Head>
-      {userType === "Patient" && <PatientNavbar />}
-      {userType === "Specialist" && <SpecialistNavbar />}
-      {!userType && <Navbar setUserType={setUserType} />}
-      <Component {...pageProps} setUserType={setUserType} />
+      <Component {...pageProps} />
       <Footer />
     </AuthProvider>
-    </>
-    
   );
 }
+
+export default MyApp;
+

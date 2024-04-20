@@ -8,19 +8,28 @@ import { XIcon } from "@heroicons/react/solid";
 
 import { Fragment } from "react";
 
-import { AuthProvider } from "./Patient/AuthContext";
+import { AuthProvider } from "./AuthContext";
 
 import { useState } from "react";
 
 import axios from "axios";
 import { useAuth } from "./AuthContext";
+import DefaultLayout from "./layouts/DefaultLayout";
+
 
 export default function LoginPage() {
   const [showError, setShowError] = useState(false);
-  const { login } = useAuth();
+  const { login, loading } = useAuth();
 
   const router = useRouter();
   const [showSuccess, setShowSuccess] = useState(false);
+
+  let userId = null;
+
+  // Check if window is defined before accessing localStorage
+  if (typeof window !== "undefined") {
+    userId = localStorage.getItem("userId");
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -32,66 +41,75 @@ export default function LoginPage() {
       user_type: formData.get("user_type"),
     };
 
+    // console.log("Log In Details:", logInDetails);
+
     try {
       const response = await axios.post(
-        "https://timelycare.onrender.com/profiles/login/",
+        "https://timelycare.onrender.com/login/",
         logInDetails
       );
 
-      console.log("Response Data:", response.data); // Debugging
+      // console.log("Response Data:", response.data);
 
-      // Check if the response contains a message indicating a redirection
+      const userType = logInDetails.user_type; // Use userType from logInDetails
+      // console.log("User Type:", userType);
+
+      // Log the userType
+      const userId = response.data.user_info.id; // Correct path to userId
+      // console.log("Saving User ID:", userId);
+      localStorage.setItem("userId", userId);
+      
+
+      await login(userId, userType);
+
       const redirectMessage = response.data.message;
       if (
         redirectMessage &&
         redirectMessage.toLowerCase().includes("patient")
       ) {
-        // Perform login action
-        login();
+        login(userId, userType); // Pass userId and userType to login
 
-        // Redirect to the patient dashboard
         router.push("/Patient/dashboard");
-        return; // Exit the function to prevent further execution
+        return;
       }
 
-      // Assuming the server response includes the user type
-      const userType = response.data.user_type;
-      console.log("User Type:", userType); // Debugging
+      login(userId, userType); // Pass userId and userType to login
 
-      // Perform login action
-      login();
-
-      // Navigate to the appropriate page based on user type
       if (userType === "Specialist") {
-        router.push("/specialist/dashboard");
+        router.push("/Specialist/dashboard");
       } else if (userType === "Patient") {
-        router.push("/patient/dashboard");
+        router.push("/Patient/dashboard");
       } else {
-        // Handle unknown user type
       }
+    
+      setShowSuccess(true); // Show success notification
+
+      // Rest of your code...
     } catch (error) {
       console.error("Error log in:", error);
-      setShowError(true);
+      setShowError(true); // Show error notification
     }
+  
+    
   };
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-play font-extrabold text-gray-900">
-            Log In as a Specialist
+            Log in
             <a
               href="/Signup2"
               className="font-medium text-one hover:text-two"
             ></a>
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{" "}
+          <p className="mt-2 text-center font-play text-sm text-gray-600">
+            Or {" "}
             <a
-              href="/Signup2"
+              href="/Signup"
               className="font-medium text-one font-play hover:text-two"
             >
-              patient
+              Sign Up
             </a>
           </p>
         </div>

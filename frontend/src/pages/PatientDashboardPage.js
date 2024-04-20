@@ -1,13 +1,12 @@
-// pages/patient/dashboard.js
-// Patient dashboard page
+
 import ProtectedRoute from "../../components/ProtectedRoute";
 import PatientLayout from "../../layouts/PatientLayout";
-
+import Appointments from "./Patient/Appointments";
 function PatientDashboardPage() {
   return (
     <ProtectedRoute>
       <PatientLayout>
-        <h2>http://localhost:3000/Patient/dashboard</h2>
+     
       </PatientLayout>
     </ProtectedRoute>
   );

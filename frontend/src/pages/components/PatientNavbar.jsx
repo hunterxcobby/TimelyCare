@@ -1,4 +1,3 @@
-
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import {
@@ -15,24 +14,42 @@ import {
   ViewGridIcon,
   XIcon,
 } from "@heroicons/react/outline";
+import { useRouter } from "next/router";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import { useAuth } from "../AuthContext";
-const { isLoggedIn, logout } = useAuth();
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+// Destructure logout from useAuth
+function LogoutButton() {
+  const { logout } = useAuth();
+  const router = useRouter();
 
+  const handleLogout = async () => {
+    
+    await logout();
+    router.push('/');
+  };
+
+  return (
+    <button onClick={handleLogout} className="ml-8 whitespace-nowrap inline-flex  font-play items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700">
+      Log Out
+    </button>
+  );
+}
 export default function PatientNavbar() {
+  const { logout } = useAuth(); 
   return (
     <div className="relative bg-gray-50">
       <Popover className="relative bg-white shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center py-6 md:justify-start md:space-x-30">
-            <div className="flex justify-start lg:w-0 lg:flex-1 text-base text-xl font-play text-two hover:text-two">
-              <Link href="#"></Link>
-              Timely Care
-            </div>
+          <div className="flex justify-start lg:w-0 lg:flex-1 text-base text-xl font-play text-two hover:text-two">
+  <Link href="#">
+    Timely Care
+  </Link>
+</div>
             <div className="-mr-2 -my-2 md:hidden">
               <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                 <span className="sr-only">Open menu</span>
@@ -61,6 +78,7 @@ export default function PatientNavbar() {
                   </>
                 )}
               </Popover>
+              
 
               <Link
                 href="/"
@@ -68,8 +86,19 @@ export default function PatientNavbar() {
               >
                 Home
               </Link>
-            
+              <Link
+                href="/Patient/Appointments"
+                className="text-base font-medium text-black font-play hover:text-gray-900"
+              >
+                My appointments
+              </Link>
 
+              <Link
+                href="/Patient/Appointment"
+                className="text-base font-medium text-black font-play hover:text-gray-900"
+              >
+                Book an appointment
+              </Link>
               <Popover className="relative">
                 {({ open }) => (
                   <>
@@ -88,19 +117,17 @@ export default function PatientNavbar() {
             </Popover.Group>
             <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
               <Link
-                href="/Login"
+                href="/Patient/Profile"
                 className="whitespace-nowrap text-base font-play font-medium text-black hover:text-gray-900"
               >
-                My Profile
+               My Profile
               </Link>
-              <Link
-                href="/Signup"
-                className="ml-8 whitespace-nowrap inline-flex  font-play items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
-              >
-                Log Out
-              </Link>
+           
+              <LogoutButton/>
             </div>
+           
           </div>
+         
         </div>
 
         <Transition
@@ -119,10 +146,11 @@ export default function PatientNavbar() {
             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
               <div className="pt-5 pb-6 px-5">
                 <div className="flex items-center justify-between">
-                  <div className="flex justify-start lg:w-0 lg:flex-1 font-play text-base font-medium text-two text-xl hover:text-gray-700">
-                    <Link href="#"></Link>
-                    Timely Care
-                  </div>
+                <div className="flex justify-start lg:w-0 lg:flex-1 text-base text-xl font-play text-two hover:text-two">
+  <Link href="#">
+    Timely Care
+  </Link>
+</div>
                   <div></div>
                   <div className="-mr-2">
                     <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -144,19 +172,34 @@ export default function PatientNavbar() {
                     Home
                   </Link>
                 </div>
+                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                  <Link
+                    href="/Patient/Appointments"
+                    className="text-base font-medium text-black font-play hover:text-gray-900"
+                  >
+                    My appointments
+                  </Link>
+                </div>
+                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                  <Link
+                    href="/Patient/Appointment"
+                    className="text-base font-medium text-black font-play hover:text-gray-900"
+                  >
+                    Book an appointment
+                  </Link>
+                </div>
                 <div>
                   <Link
-                    href="/Profile"
+                    href="/Patient/Profile"
                     className="w-full flex items-center justify-center font-play px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-one hover:bg-indigo-700"
                   >
-                    My Profile Patient
+                    My Profile
                   </Link>
-                  <p className="mt-6 text-center text-base font-medium font-play text-gray-500">
-                    Existing patient?
-                    <Link href="#" className="text-two font-play hover:text-indigo-500">
-                     Log Out
-                    </Link>
-                  </p>
+                  <div>
+                    <p className="mt-6 text-center text-base font-medium font-play text-gray-500">
+                      <LogoutButton/>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

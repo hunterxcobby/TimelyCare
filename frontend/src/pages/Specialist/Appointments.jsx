@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAuth } from '../AuthContext';
-import PatientLayout from '../layouts/PatientLayout';
+import SpecialistLayout from '../layouts/SpecialistLayout';
 export default function Appointments() {
   const { user } = useAuth();
   const [appointments, setAppointments] = useState([]);
@@ -46,7 +46,7 @@ export default function Appointments() {
   // }
 
   return (
-    <PatientLayout>
+    <SpecialistLayout>
     {appointments.map((appointment, index) => (
       <div key={index} className="bg-white shadow overflow-hidden sm:rounded-lg">
         <div className="px-4 py-5 sm:px-6">
@@ -54,6 +54,10 @@ export default function Appointments() {
         </div>
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
           <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
+          <div className="sm:col-span-1">
+              <dt className="text-sm font-playfont-medium text-gray-500">User Name</dt>
+              <dd className="mt-1 text-sm font-play text-gray-900">Abdirahman</dd>
+            </div>
             <div className="sm:col-span-1">
               <dt className="text-sm font-playfont-medium text-gray-500">Symptom Type</dt>
               <dd className="mt-1 text-sm font-play text-gray-900">{appointment.symptom_type}</dd>
@@ -63,21 +67,21 @@ export default function Appointments() {
               <dd className="mt-1 text-sm font-play text-gray-900">{appointment.symptom_description}</dd>
             </div>
             <div className="sm:col-span-1">
-              <dt className="text-sm font-medium font-play text-gray-500">Date</dt>
+              <dt className="text-sm font-medium font-play text-gray-500">Appointment Date</dt>
               <dd className="mt-1 text-sm font-play text-gray-900">{appointment.date}</dd>
             </div>
             <div className="sm:col-span-1">
-              <dt className="text-sm font-medium font-play text-gray-500">Time</dt>
+              <dt className="text-sm font-medium font-play text-gray-500">Appointment Time</dt>
               <dd className="mt-1 text-sm font-play text-gray-900">{appointment.time}</dd>
             </div>
             <div className="sm:col-span-1">
-              <dt className="text-sm font-medium font-play text-gray-500">Status</dt>
+              <dt className="text-sm font-medium font-play text-gray-500">Appointment Status</dt>
               <dd className="mt-1 text-sm font-play text-gray-900">{appointment.status}</dd>
             </div>
           </dl>
         </div>
       </div>
     ))}
-  </PatientLayout>
+  </SpecialistLayout>
   );
 }

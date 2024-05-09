@@ -32,7 +32,7 @@ export default function Appointment() {
 
     try {
       const response = await axios.post(
-        "https://timelycare.onrender.com/appointments/appointments/create/",
+        "https://WecareTimely.onrender.com/appointments/appointments/create/",
         appointmentDetails
       );
 
@@ -66,20 +66,18 @@ export default function Appointment() {
             htmlFor="patient"
             className="block text-sm font-medium font-play  text-gray-700"
           >
-            Patient
+          
           </label>
           <div className="mt-1">
-            <input
-              id="patient"
-              name="patient"
-              type="text"
-              autoComplete="firstname"
-              required
-              value={userId}
-              readOnly 
-              className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-            />
-          </div>
+  <input
+    id="patient"
+    name="patient"
+    type="hidden"
+    required
+    value={userId}
+    readOnly 
+  />
+</div>
         </div>
         <div>
                 <label

@@ -152,7 +152,7 @@ export default function Example() {
             <div className="lg:col-start-2">
               <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight  font-play sm:text-3xl">Direct Specialist Appointments</h3>
               <p className="mt-3 text-lg font-play text-gray-500">
-              With TimelyCare, you can book appointments directly with specialists without navigating through the traditional healthcare system
+              With WecareTimely, you can book appointments directly with specialists without navigating through the traditional healthcare system
               </p>
 
               <dl className="mt-10 space-y-10">

@@ -94,6 +94,13 @@ export default function PatientNavbar() {
                 Patients list
               </Link>
 
+              <Link
+                href="/Specialist/Appointments"
+                className="text-base font-medium text-black font-play hover:text-gray-900"
+              >
+                Appointments
+              </Link>
+
               <Popover className="relative">
                 {({ open }) => (
                   <>
@@ -172,7 +179,14 @@ export default function PatientNavbar() {
                     Patients list
                   </Link>
                 </div>
-
+                <div>
+                <Link
+                href="/Specialist/Appointments"
+                className="text-base font-medium text-black font-play hover:text-gray-900"
+              >
+                Appointments
+              </Link>
+              </div>
                 <div>
                   <Link
                     href="/Specialist/Profile"

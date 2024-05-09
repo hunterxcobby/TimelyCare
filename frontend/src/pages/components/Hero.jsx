@@ -18,7 +18,7 @@ export default function Example() {
           <h2 className="text-base font-semibold uppercase tracking-wider font-play  text-two">Elevating Your Health</h2>
           <p className="mt-2 text-black text-3xl font-extrabold font-play tracking-tight sm:text-4xl">One Appointment at a Time</p>
           <p className="mt-3 text-lg font-play text-black">
-          At TimelyCare, we prioritize your well-being. Our platform empowers you to take control of your health journey by facilitating direct specialist appointments, bypassing the traditional hospital visit maze
+          At WecareTimely, we prioritize your well-being. Our platform empowers you to take control of your health journey by facilitating direct specialist appointments, bypassing the traditional hospital visit maze
           </p>
           <div className="mt-8">
             <div className="inline-flex rounded-md shadow">

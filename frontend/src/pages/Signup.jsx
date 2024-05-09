@@ -36,7 +36,7 @@ export default function SignUpPage() {
       console.log("Sign-up details:", signUpDetails);
 
       const response = await axios.post(
-        "https://timelycare.onrender.com/user/add/",
+        "https://WecareTimely.onrender.com/user/add/",
         signUpDetails
       );
 

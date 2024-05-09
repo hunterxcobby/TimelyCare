@@ -16,7 +16,7 @@ export default function Profile() {
       const fetchUserData = async () => {
         try {
           const response = await axios.get(
-            `https://timelycare.onrender.com/specialist/${userId}/`
+            `https://WecareTimely.onrender.com/specialist/${userId}/`
           );
         //   console.log("User Data:", response.data); // Log the user data
           setUserData(response.data);

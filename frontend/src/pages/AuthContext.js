@@ -40,7 +40,10 @@ export function AuthProvider({ children }) {
     setUserId(null);
     setUserType(null);
     setToken(null);
-    setLoading(true); // Set loading to true when the user logs out
+    setLoading(true); 
+    // localStorage.removeItem('userId');
+    // localStorage.removeItem('appointmentIds');
+    // Set loading to true when the user logs out
     if (typeof window !== 'undefined') {
       localStorage.removeItem('userId');
       localStorage.removeItem('userType');

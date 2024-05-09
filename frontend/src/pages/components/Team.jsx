@@ -9,9 +9,9 @@ import Link from "next/link"
         </h2>
         <div className="mt-12">
           <p className="text-lg font-play text-gray-500">
-            TimelyCare was born out of a personal need for efficient and accessible healthcare solutions. Our journey began with a shared frustration towards the traditional healthcare system's complexities and inefficiencies. We envisioned a platform that would empower individuals to take control of their health journey by providing direct access to specialist care without the hassle of lengthy appointment processes.
+          WecareTimely was born out of a personal need for efficient and accessible healthcare solutions. Our journey began with a shared frustration towards the traditional healthcare system's complexities and inefficiencies. We envisioned a platform that would empower individuals to take control of their health journey by providing direct access to specialist care without the hassle of lengthy appointment processes.
             <br /><br />
-            As a Portfolio Project for Holberton School, TimelyCare represents our commitment to innovation and our passion for making a positive impact on people's lives. We embarked on this journey with the goal of revolutionizing the healthcare industry and ensuring that everyone has timely access to quality healthcare services.
+            As a Portfolio Project for Holberton School, WecareTimely represents our commitment to innovation and our passion for making a positive impact on people's lives. We embarked on this journey with the goal of revolutionizing the healthcare industry and ensuring that everyone has timely access to quality healthcare services.
           </p>
         </div>
         <div className="mt-12">
@@ -51,7 +51,7 @@ import Link from "next/link"
           </ul>
         </div>
         <div className="mt-8 text-center">
-          <Link href="https://github.com/hunterxcobby/TimelyCare" target="_blank" rel="noopener noreferrer" className="inline-block bg-one py-2 px-4 border border-transparent rounded-md text-base font-play font-medium text-white hover:bg-indigo-700">
+          <Link href="https://github.com/hunterxcobby/WecareTimely" target="_blank" rel="noopener noreferrer" className="inline-block bg-one py-2 px-4 border border-transparent rounded-md text-base font-play font-medium text-white hover:bg-indigo-700">
             View GitHub Repository
           </Link>
         </div>

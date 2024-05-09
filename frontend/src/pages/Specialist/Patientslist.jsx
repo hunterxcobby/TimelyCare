@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import SpecialistLayout from "../layouts/SpecialistLayout";
+import Link from "next/link";
 export default function Example() {
   const [patients, setPatients] = useState([]);
 
@@ -8,7 +9,7 @@ export default function Example() {
     const fetchPatients = async () => {
       try {
         const response = await axios.get(
-          "https://timelycare.onrender.com/patient"
+          "https://WecareTimely.onrender.com/patient"
         );
         console.log("Patients Data:", response.data);
         setPatients(response.data);

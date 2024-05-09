@@ -4,19 +4,19 @@ const faqs = [
     id: 1,
     question: "Our Mission:",
     answer:
-      "At the core of TimelyCare's mission is the commitment to prioritize your well-being. We understand the challenges individuals face when seeking specialist care, and we are here to change the game. Our platform empowers you to take control of your health journey by facilitating direct specialist appointments, bypassing the traditional hospital visit maze..",
+      "At the core of WecareTimely's mission is the commitment to prioritize your well-being. We understand the challenges individuals face when seeking specialist care, and we are here to change the game. Our platform empowers you to take control of your health journey by facilitating direct specialist appointments, bypassing the traditional hospital visit maze..",
   },
   {
     id: 2,
     question: "Innovation at Its Core:",
     answer:
-      "TimelyCare is the product of relentless dedication and innovation. Our teams at ALX worked tirelessly to develop a service that redefines how healthcare is accessed. By leveraging cutting-edge technology and a user-centric approach, we've created a platform that simplifies the entire healthcare process..",
+      "WecareTimely is the product of relentless dedication and innovation. Our teams at ALX worked tirelessly to develop a service that redefines how healthcare is accessed. By leveraging cutting-edge technology and a user-centric approach, we've created a platform that simplifies the entire healthcare process..",
   },
   {
     id: 3,
     question: "Empowering Your Well-being",
     answer:
-      "Your health is our priority. TimelyCare is not just a service; it's a commitment to empower individuals seeking specialist care. We believe that everyone deserves timely access to quality healthcare, and we're here to make that a reality.",
+      "Your health is our priority. WecareTimely is not just a service; it's a commitment to empower individuals seeking specialist care. We believe that everyone deserves timely access to quality healthcare, and we're here to make that a reality.",
   },
 
 
@@ -28,11 +28,11 @@ export default function Example() {
       <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
         <div className="max-w-2xl lg:mx-auto lg:text-center">
           <h2 className="text-3xl font-extrabold tracking-tight text-two sm:text-4xl">
-            Welcome to TimelyCare – Elevating your health, one appointment at a
+            Welcome to WecareTimely – Elevating your health, one appointment at a
             time
           </h2>
           <p className="mt-4 text-gray-500">
-            At TimelyCare, we believe that your well-being should never be
+            At WecareTimely, we believe that your well-being should never be
             compromised by cumbersome healthcare processes. Our journey began at
             ALX, where a dedicated team of innovators pooled their passion and
             expertise to create a revolutionary solution that puts your health
